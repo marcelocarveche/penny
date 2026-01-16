@@ -24,6 +24,9 @@ module Maybe
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # Configuração para Português do Brasil
+    config.i18n.default_locale = :"pt-BR"
+    config.i18n.available_locales = [:en, :"pt-BR"]
     # TODO: This is here for incremental adoption of localization.  This can be removed when all translations are implemented.
     config.i18n.fallbacks = true
 
