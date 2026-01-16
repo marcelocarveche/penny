@@ -2,9 +2,9 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.3"
 	},
-	"name": "maybe",
+	"name": "penny",
 	"version": "1.0.0",
-	"description": "The OS for your personal finances",
+	"description": "Gerenciador de finanças pessoais em Português Brasileiro (Fork do Maybe Finance)",
 	"scripts": {
 		"style:check": "biome check",
 		"style:fix": "biome check --write",
@@ -13,6 +13,6 @@
 		"format:check": "biome format",
 		"format": "biome format --write"
 	},
-	"author": "",
-	"license": "ISC"
+	"author": "Marcelo Carveche",
+	"license": "AGPL-3.0"
 }

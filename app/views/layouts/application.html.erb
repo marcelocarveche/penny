@@ -36,7 +36,7 @@
       <%= icon("panel-left", as_button: true, data: { action: "app-layout#openMobileSidebar"}) %>
 
       <%= link_to root_path, class: "block" do %>
-        <%= image_tag "logomark-color.svg", class: "w-9 h-9 mx-auto" %>
+        <%= image_tag "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", class: "w-9 h-9 mx-auto" %>
       <% end %>
 
       <%= render "users/user_menu", user: Current.user, placement: "bottom-end", offset: 12 %>
@@ -47,7 +47,7 @@
       <nav class="h-full flex flex-col shrink-0 w-[84px] py-4 mr-3">
         <div class="pl-2 mb-3">
           <%= link_to root_path, class: "block" do %>
-            <%= image_tag "logomark-color.svg", class: "w-9 h-9 mx-auto" %>
+            <%= image_tag "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", class: "w-9 h-9 mx-auto" %>
           <% end %>
         </div>
 
@@ -111,6 +111,15 @@
 
     <%# SHARED - Main content %>
     <%= tag.main class: class_names("grow overflow-y-auto px-3 lg:px-10 py-4 w-full mx-auto max-w-5xl"), data: { app_layout_target: "content" } do %>
+      <%# AGPLv3 Compliance - Source Code Link %>
+      <div class="hidden lg:flex justify-end mb-2">
+        <div class="text-gray-500 whitespace-nowrap" style="font-size: 0.45rem !important;">
+          <%= link_to "Código-Fonte", "https://github.com/marcelocarveche/penny", target: "_blank", rel: "noopener noreferrer", class: "hover:text-gray-400 transition-colors", style: "font-size: 0.45rem !important;" %> 
+          <span class="mx-1">·</span>
+          <%= link_to "Baseado em Maybe", "https://github.com/maybe-finance/maybe", target: "_blank", rel: "noopener noreferrer", class: "hover:text-gray-400 transition-colors", style: "font-size: 0.45rem !important;" %>
+        </div>
+      </div>
+      
       <div class="hidden lg:flex gap-2 items-center justify-between mb-6">
         <div class="flex items-center gap-2">
           <%= icon("panel-left", as_button: true, data: { action: "app-layout#toggleLeftSidebar" }) %>

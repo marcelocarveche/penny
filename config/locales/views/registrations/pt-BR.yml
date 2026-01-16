@@ -19,7 +19,8 @@ pt-BR:
       role_member: membro
       submit: Criar conta
       title: Crie sua conta
-      welcome_body: Para começar, você deve se cadastrar para uma nova conta. Você
+      welcome_body:
+        Para começar, você deve se cadastrar para uma nova conta. Você
         poderá então configurar ajustes adicionais dentro do aplicativo.
       welcome_title: Bem-vindo ao Penny Auto-Hospedado!
       password_placeholder: Digite sua senha

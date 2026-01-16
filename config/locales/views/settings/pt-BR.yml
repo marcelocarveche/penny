@@ -30,11 +30,13 @@ pt-BR:
         not_authorized: Você não está autorizado a remover membros.
       show:
         confirm_delete:
-          body: Tem certeza de que deseja excluir permanentemente sua conta? Esta
+          body:
+            Tem certeza de que deseja excluir permanentemente sua conta? Esta
             ação é irreversível.
           title: Excluir conta?
         confirm_reset:
-          body: Tem certeza de que deseja redefinir sua conta? Isso excluirá todas
+          body:
+            Tem certeza de que deseja redefinir sua conta? Isso excluirá todas
             as suas contas, categorias, comerciantes, tags e outros dados. Esta ação
             não pode ser desfeita.
           title: Redefinir conta?
@@ -46,17 +48,20 @@ pt-BR:
           title: Remover Membro
         danger_zone_title: Zona de Perigo
         delete_account: Excluir conta
-        delete_account_warning: Excluir sua conta removerá permanentemente todos os
+        delete_account_warning:
+          Excluir sua conta removerá permanentemente todos os
           seus dados e não poderá ser desfeito.
         reset_account: Redefinir conta
-        reset_account_warning: Redefinir sua conta excluirá todas as suas contas,
+        reset_account_warning:
+          Redefinir sua conta excluirá todas as suas contas,
           categorias, comerciantes, tags e outros dados, mas manterá sua conta de
           usuário intacta.
         email: E-mail
         first_name: Primeiro Nome
         household_form_input_placeholder: Digite o nome da família
         household_form_label: Nome da família
-        household_subtitle: Convide membros da família, parceiros e outros indivíduos.
+        household_subtitle:
+          Convide membros da família, parceiros e outros indivíduos.
           Os convidados podem fazer login em sua família e acessar suas contas compartilhadas.
         household_title: Família
         invitation_link: Link de convite

@@ -48,7 +48,8 @@ pt-BR:
         owed: Valor devido
       menu:
         confirm_accept: Excluir "%{name}"
-        confirm_body_html: "<p>Ao excluir esta conta, você apagará seu histórico de
+        confirm_body_html:
+          "<p>Ao excluir esta conta, você apagará seu histórico de
           valores, afetando vários aspectos da sua conta geral. Esta ação terá um
           impacto direto nos cálculos do seu patrimônio líquido e nos gráficos da conta.</p><br />
           <p>Após a exclusão, não há como restaurar as informações da conta, pois
@@ -62,5 +63,6 @@ pt-BR:
   email_confirmations:
     new:
       invalid_token: Link de confirmação inválido ou expirado.
-      success_login: Seu e-mail foi confirmado. Por favor, faça login com seu novo
+      success_login:
+        Seu e-mail foi confirmado. Por favor, faça login com seu novo
         endereço de e-mail.
