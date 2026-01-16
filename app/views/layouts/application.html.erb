@@ -1,8 +1,8 @@
 <% mobile_nav_items = [
-  { name: "Home", path: root_path, icon: "pie-chart", icon_custom: false, active: page_active?(root_path) },
-  { name: "Transactions", path: transactions_path, icon: "credit-card", icon_custom: false, active: page_active?(transactions_path) },
-  { name: "Budgets", path: budgets_path, icon: "map", icon_custom: false, active: page_active?(budgets_path) },
-  { name: "Assistant", path: chats_path, icon: "icon-assistant", icon_custom: true, active: page_active?(chats_path), mobile_only: true }
+  { name: "Início", path: root_path, icon: "pie-chart", icon_custom: false, active: page_active?(root_path) },
+  { name: "Transações", path: transactions_path, icon: "credit-card", icon_custom: false, active: page_active?(transactions_path) },
+  { name: "Orçamentos", path: budgets_path, icon: "map", icon_custom: false, active: page_active?(budgets_path) },
+  { name: "Assistente", path: chats_path, icon: "icon-assistant", icon_custom: true, active: page_active?(chats_path), mobile_only: true }
 ] %>
 
 <% desktop_nav_items = mobile_nav_items.reject { |item| item[:mobile_only] } %>
@@ -89,12 +89,12 @@
             <div class="px-4 py-3 space-y-4 bg-container shadow-border-xs rounded-xl">
               <div class="flex items-start justify-between">
                 <div>
-                  <p class="text-sm font-medium text-primary">Free trial</p>
-                  <p class="text-sm text-secondary"><%= Current.family.days_left_in_trial %> days remaining</p>
+                  <p class="text-sm font-medium text-primary">Teste gratuito</p>
+                  <p class="text-sm text-secondary"><%= Current.family.days_left_in_trial %> dias restantes</p>
                 </div>
 
                 <%= render DS::Link.new(
-                  text: "Upgrade",
+                  text: "Atualizar",
                   href: upgrade_subscription_path,
                 ) %>
               </div>

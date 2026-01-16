@@ -9,6 +9,7 @@ module Localize
   private
     def switch_locale(&action)
       locale = Current.family.try(:locale) || I18n.default_locale
+      Rails.logger.info "=== LOCALE DEBUG: family.locale=#{Current.family.try(:locale)}, final locale=#{locale}, default=#{I18n.default_locale} ==="
       I18n.with_locale(locale, &action)
     end
 
