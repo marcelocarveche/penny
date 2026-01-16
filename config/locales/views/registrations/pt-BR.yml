@@ -1,0 +1,25 @@
+---
+pt-BR:
+  helpers:
+    label:
+      user:
+        invite_code: Código de Convite
+    submit:
+      user:
+        create: Continuar
+  registrations:
+    create:
+      failure: Houve um problema ao fazer o cadastro.
+      invalid_invite_code: Código de convite inválido, tente novamente.
+      success: Você se cadastrou com sucesso.
+    new:
+      invitation_message: "%{inviter} convidou você para participar como %{role}"
+      join_family_title: Junte-se a %{family}
+      role_admin: administrador
+      role_member: membro
+      submit: Criar conta
+      title: Crie sua conta
+      welcome_body: Para começar, você deve se cadastrar para uma nova conta. Você
+        poderá então configurar ajustes adicionais dentro do aplicativo.
+      welcome_title: Bem-vindo ao Penny Auto-Hospedado!
+      password_placeholder: Digite sua senha
