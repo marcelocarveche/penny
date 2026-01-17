@@ -1,6 +1,28 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def last_backup_time
+    time = Rails.cache.read("last_backup_at")
+    return "Nenhum backup" unless time
+
+    diff = Time.current - time
+
+    if diff < 60
+      "#{diff.to_i} segundos atrás"
+    elsif diff < 1.hour
+      minutes = (diff / 1.minute).to_i
+      "#{minutes} #{'minuto'.pluralize(minutes, :pt)} atrás"
+    elsif diff < 1.day
+      hours = (diff / 1.hour).to_i
+      "#{hours} #{'hora'.pluralize(hours, :pt)} atrás"
+    elsif diff <= 10.days
+      days = (diff / 1.day).to_i
+      "#{days} #{'dia'.pluralize(days, :pt)}"
+    else
+      "há muito tempo :("
+    end
+  end
+
   def styled_form_with(**options, &block)
     options[:builder] = StyledFormBuilder
     form_with(**options, &block)

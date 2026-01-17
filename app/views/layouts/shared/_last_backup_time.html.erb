@@ -1,0 +1,24 @@
+<%# locals: (last_backup_at: nil) %>
+<% last_backup_at ||= Rails.cache.read("last_backup_at") %>
+
+<span id="last_backup_time" class="text-xs text-gray-500" title="Último Backup">
+  <% if last_backup_at %>
+    <% diff = Time.current - last_backup_at %>
+    <% if diff < 60 %>
+      alguns segundos atrás
+    <% elsif diff < 1.hour %>
+      <% minutes = (diff / 1.minute).to_i %>
+      <%= "#{minutes} #{'minuto'.pluralize(minutes, :pt)} atrás" %>
+    <% elsif diff < 1.day %>
+      <% hours = (diff / 1.hour).to_i %>
+      <%= "#{hours} #{'hora'.pluralize(hours, :pt)} atrás" %>
+    <% elsif diff <= 10.days %>
+      <% days = (diff / 1.day).to_i %>
+      <%= "#{days} #{'dia'.pluralize(days, :pt)}" %>
+    <% else %>
+      há muito tempo :(
+    <% end %>
+  <% else %>
+    Nenhum backup
+  <% end %>
+</span>

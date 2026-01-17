@@ -97,6 +97,14 @@ command_restore() {
   echo "Restore completed."
 }
 
+command_latest() {
+  if [ -z "$RCLONE_CONFIG_GDRIVE_TOKEN" ]; then
+    exit 1
+  fi
+  # List files, sort by time (column 2,3), take last line, print date and time
+  rclone lsl "${RCLONE_REMOTE}:${RCLONE_REMOTE_PATH}" | sort -k 2,3 | tail -n 1 | awk '{print $2, $3}'
+}
+
 case "$1" in
   backup)
     command_backup
@@ -104,8 +112,11 @@ case "$1" in
   restore)
     command_restore
     ;;
+  latest)
+    command_latest
+    ;;
   *)
-    echo "Usage: $0 {backup|restore}"
+    echo "Usage: $0 {backup|restore|latest}"
     exit 1
     ;;
 esac
