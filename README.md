@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-# Penny: This project is based on Maybe Finance but is not affiliated with, sponsored, or endorsed by Maybe Finance Inc.
-
-=======
 <img width="1190" alt="maybe_hero" src="https://github.com/user-attachments/assets/5ed08763-a9ee-42b2-a436-e05038fcf573" />
 
 # Penny: Gerenciador de Finanças Pessoais
@@ -37,6 +32,25 @@
 
 Conforme exigido pela licença AGPLv3, o código-fonte completo incluindo todas as
 modificações está disponível em: https://github.com/marcelocarveche/penny
+
+---
+
+## ☁️ Backup e Restauração (Google Drive)
+
+O sistema possui backup automático para o Google Drive e restauração automática ao iniciar.
+
+### Configuração
+Para configurar, você precisa autorizar o acesso ao seu Google Drive e adicionar o token ao `.env`. (Veja instruções detalhadas no arquivo `walkthrough.md`).
+
+### Backup Manual
+Você pode acionar o backup manualmente de duas formas:
+
+1. **Pela Interface**: Clique no ícone de "Nuvem" no cabeçalho da aplicação.
+2. **Pelo Terminal**: Execute o script abaixo:
+
+```bash
+./bin/trigger_backup
+```
 
 ---
 
@@ -83,7 +97,6 @@ For further instructions, see guides below.
 - Dev containers - visit [this guide](https://code.visualstudio.com/docs/devcontainers/containers) to learn more
 
 ## 📄 Copyright & Licença
->>>>>>> 7c40b025400f28aef41de07cf3dc55c5d4c960ee
 
 ### Licença Original (Maybe Finance)
 
