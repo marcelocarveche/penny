@@ -262,6 +262,10 @@ Rails.application.routes.draw do
   post "backup", to: "backups#create"
   post "backup/check", to: "backups#check"
 
+  get "/auth/:provider/callback", to: "integrations/google_drive#create"
+  get "/auth/failure", to: "integrations/google_drive#failure"
+  delete "/integrations/google_drive", to: "integrations/google_drive#destroy", as: :google_drive_integration
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

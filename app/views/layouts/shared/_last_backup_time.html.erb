@@ -4,21 +4,37 @@
 <span id="last_backup_time" class="text-xs text-gray-500" title="Último Backup">
   <% if last_backup_at %>
     <% diff = Time.current - last_backup_at %>
+    <% 
+      emoji = if diff < 3.minutes
+        "😲"
+      elsif diff < 6.minutes
+        "🙂"
+      elsif diff < 9.minutes
+        "😟"
+      else
+        "😨"
+      end
+    %>
+
     <% if diff < 60 %>
-      alguns segundos atrás
+      <%= "segundos atrás #{emoji}" %>
     <% elsif diff < 1.hour %>
       <% minutes = (diff / 1.minute).to_i %>
-      <%= "#{minutes} #{'minuto'.pluralize(minutes, :pt)} atrás" %>
+      <%= "#{minutes} #{'minuto'.pluralize(minutes, :pt)} atrás #{emoji}" %>
     <% elsif diff < 1.day %>
       <% hours = (diff / 1.hour).to_i %>
-      <%= "#{hours} #{'hora'.pluralize(hours, :pt)} atrás" %>
+      <%= "#{hours} #{'hora'.pluralize(hours, :pt)} atrás #{emoji}" %>
     <% elsif diff <= 10.days %>
       <% days = (diff / 1.day).to_i %>
-      <%= "#{days} #{'dia'.pluralize(days, :pt)}" %>
+      <%= "#{days} #{'dia'.pluralize(days, :pt)} #{emoji}" %>
     <% else %>
-      há muito tempo :(
+      há muito tempo :( <%= emoji %>
     <% end %>
   <% else %>
-    Nenhum backup
+    <% if Current.family.google_drive_config.blank? %>
+      Backup não configurado
+    <% else %>
+      Nenhum backup
+    <% end %>
   <% end %>
 </span>

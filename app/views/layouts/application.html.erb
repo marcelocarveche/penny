@@ -46,10 +46,19 @@
       <div class="flex items-center gap-2">
         <%= render "layouts/shared/last_backup_time" %>
 
-        <%= form_with url: backup_path, method: :post, data: { controller: "backup", action: "turbo:submit-end->backup#reset", check_url: backup_check_path }, class: "flex" do %>
-          <%= button_tag type: "submit", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Fazer Backup", data: { backup_target: "button", action: "click->backup#loading" } do %>
-            <%= icon("cloud-upload") %>
+        <% if Current.family.google_drive_config.present? %>
+          <%= form_with url: backup_path, method: :post, data: { controller: "backup", action: "turbo:submit-end->backup#reset", check_url: backup_check_path }, class: "flex" do %>
+            <%= button_tag type: "submit", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Fazer Backup", data: { backup_target: "button", action: "click->backup#loading" } do %>
+              <%= icon("cloud-upload") %>
+            <% end %>
           <% end %>
+        <% else %>
+          <div class="relative">
+            <%= link_to settings_profile_path(anchor: "google-drive-backup"), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Configurar Backup" do %>
+              <%= icon("cloud-upload") %>
+            <% end %>
+            <span class="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-gray-900 bg-orange-500"></span>
+          </div>
         <% end %>
 
         <%= render "users/user_menu", user: Current.user, placement: "bottom-end", offset: 12 %>
@@ -150,10 +159,19 @@
           <%= turbo_stream_from "backup_status" %>
           <%= render "layouts/shared/last_backup_time" %>
 
-          <%= form_with url: backup_path, method: :post, data: { controller: "backup", action: "turbo:submit-end->backup#reset", check_url: backup_check_path }, class: "flex" do %>
-            <%= button_tag type: "submit", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Fazer Backup", data: { backup_target: "button", action: "click->backup#loading" } do %>
-              <%= icon("cloud-upload") %>
+          <% if Current.family.google_drive_config.present? %>
+            <%= form_with url: backup_path, method: :post, data: { controller: "backup", action: "turbo:submit-end->backup#reset", check_url: backup_check_path }, class: "flex" do %>
+              <%= button_tag type: "submit", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Fazer Backup", data: { backup_target: "button", action: "click->backup#loading" } do %>
+                <%= icon("cloud-upload") %>
+              <% end %>
             <% end %>
+          <% else %>
+            <div class="relative">
+              <%= link_to settings_profile_path(anchor: "google-drive-backup"), class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Configurar Backup" do %>
+                <%= icon("cloud-upload") %>
+              <% end %>
+              <span class="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-gray-900 bg-orange-500"></span>
+            </div>
           <% end %>
 
           <%= button_tag type: "button", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", data: { action: "app-layout#toggleRightSidebar" } do %>

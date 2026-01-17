@@ -25,12 +25,17 @@ class BackupsController < ApplicationController
 
   def check
     # Rate limiting: Only check Google Drive at most once every 3 minutes
+    # But ALWAYS update the UI with the cached time so the "X minutes ago" text stays fresh.
     last_check = Rails.cache.read("last_backup_check_at")
     
     if last_check.nil? || last_check < 3.minutes.ago
       CheckBackupStatusJob.perform_later
     end
     
-    head :ok
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("last_backup_time", partial: "layouts/shared/last_backup_time")
+      end
+    end
   end
 end

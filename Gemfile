@@ -54,6 +54,8 @@ gem "jwt"
 gem "jbuilder"
 
 # OAuth & API Security
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 gem "doorkeeper"
 gem "rack-attack", "~> 6.6"
 gem "faraday"

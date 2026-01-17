@@ -11,8 +11,21 @@ class BackupJob < ApplicationJob
       File.chmod(0755, script_path)
     end
 
+    # Fetch token from Family (User-Linked Mode) OR fallback to ENV (Legacy Mode)
+    # We assume the first family is the "Instance Owner" for simplicity in this context.
+    family = Family.first
+    token = family&.google_drive_config.presence || ENV["RCLONE_CONFIG_GDRIVE_TOKEN"]
+
+    env_vars = {}
+    if token.present?
+      env_vars["RCLONE_CONFIG_GDRIVE_TOKEN"] = token
+    else
+       Rails.logger.warn "No Google Drive token found in Family config or ENV. Backup may fail if remote requires auth."
+    end
+
     require 'open3'
-    stdout_str, stderr_str, status = Open3.capture3(script_path.to_s, "backup")
+    # Execute 'manage_backup' with the injected environment variable
+    stdout_str, stderr_str, status = Open3.capture3(env_vars, script_path.to_s, "backup")
 
     if status.success?
       Rails.logger.info "Backup completed successfully: #{stdout_str}"
