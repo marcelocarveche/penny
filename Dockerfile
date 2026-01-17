@@ -9,7 +9,12 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client libyaml-0-2
+    apt-get install --no-install-recommends -y curl libvips gnupg2 wget lsb-release libyaml-0-2 dos2unix rclone && \
+    # Add PostgreSQL PGDG repo
+    sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    apt-get update -qq && \
+    apt-get install -y postgresql-client-16
 
 # Set production environment
 ARG BUILD_COMMIT_SHA
@@ -18,7 +23,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development" \
     BUILD_COMMIT_SHA=${BUILD_COMMIT_SHA}
-    
+
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
@@ -40,6 +45,7 @@ COPY . .
 RUN bundle exec bootsnap precompile -j 0 app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN dos2unix bin/rails
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Final stage for app image
@@ -56,9 +62,11 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
-USER 1000:1000
 
 # Entrypoint prepares the database.
+RUN dos2unix /rails/bin/docker-entrypoint /rails/bin/manage_backup
+USER 1000:1000
+
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime

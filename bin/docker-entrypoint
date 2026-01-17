@@ -3,6 +3,12 @@
 # If running the rails server then create or migrate existing database
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
   ./bin/rails db:prepare
+  ./bin/rails db:prepare
+
+  # Attempt restore if configured
+  if [ -f "./bin/manage_backup" ]; then
+     ./bin/manage_backup restore
+  fi
 fi
 
 exec "${@}"

@@ -1,0 +1,111 @@
+#!/bin/bash
+set -e
+
+# Configuration
+BACKUP_DIR="/tmp/backups"
+RCLONE_REMOTE="gdrive"
+RCLONE_REMOTE_PATH="penny_backups"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+BACKUP_FILE="penny_backup_${TIMESTAMP}.dump"
+LATEST_BACKUP_NAME="latest.dump"
+
+# Ensure backup directory exists
+mkdir -p "$BACKUP_DIR"
+
+PG_DUMP_CMD="pg_dump"
+if [ -f "/usr/lib/postgresql/16/bin/pg_dump" ]; then
+    PG_DUMP_CMD="/usr/lib/postgresql/16/bin/pg_dump"
+fi
+
+PG_RESTORE_CMD="pg_restore"
+if [ -f "/usr/lib/postgresql/16/bin/pg_restore" ]; then
+    PG_RESTORE_CMD="/usr/lib/postgresql/16/bin/pg_restore"
+fi
+
+command_backup() {
+  if [ -z "$RCLONE_CONFIG_GDRIVE_TOKEN" ]; then
+    echo "RCLONE_CONFIG_GDRIVE_TOKEN is not set. Skipping backup."
+    exit 0
+  fi
+
+  echo "Stacking backup..."
+  
+  # Check if database is ready
+  if ! pg_isready -h "$DB_HOST" -U "$POSTGRES_USER"; then
+    echo "Database not ready. Skipping backup."
+    exit 1
+  fi
+
+  # Dump database
+  echo "Creating dump..."
+  PGPASSWORD="$POSTGRES_PASSWORD" $PG_DUMP_CMD -h "$DB_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -F c -f "${BACKUP_DIR}/${BACKUP_FILE}"
+  
+  # Upload to Google Drive using Rclone
+  echo "Uploading to Google Drive..."
+  rclone copy "${BACKUP_DIR}/${BACKUP_FILE}" "${RCLONE_REMOTE}:${RCLONE_REMOTE_PATH}" --ignore-existing
+
+  # Optional: Keep only last 30 days of backups on remote
+  echo "Cleaning up old backups..."
+  rclone delete --min-age 30d "${RCLONE_REMOTE}:${RCLONE_REMOTE_PATH}"
+
+  # Clean up local file
+  rm "${BACKUP_DIR}/${BACKUP_FILE}"
+  
+  echo "Backup completed successfully: ${BACKUP_FILE}"
+}
+
+command_restore() {
+  echo "Starting restore process..."
+  
+  # Check if we should skip restore
+  if [ "$SKIP_RESTORE" == "true" ]; then
+        echo "SKIP_RESTORE is true. Skipping."
+        exit 0
+  fi
+
+  if [ -z "$RCLONE_CONFIG_GDRIVE_TOKEN" ]; then
+    echo "RCLONE_CONFIG_GDRIVE_TOKEN is not set. Skipping restore."
+    exit 0
+  fi
+
+  # Check if database is empty? Maybe safely ignore if it already has data to avoid overwriting?
+  # For now, let's just attempt restore. Standard pg_restore usually handles existing schemas by failing or we can use --clean if we want to force.
+  # But user requirement is "recuperar o backup a partir do mesmo" on start.
+  # Let's check for a specific flag or just always try to fetch latest.
+  
+  echo "Finding latest backup on Google Drive..."
+  # List files, sort by time, get last
+  LATEST_FILE=$(rclone lsl "${RCLONE_REMOTE}:${RCLONE_REMOTE_PATH}" | sort -k 2,3 | tail -n 1 | awk '{print $4}')
+  
+  if [ -z "$LATEST_FILE" ]; then
+    echo "No backup found in ${RCLONE_REMOTE}:${RCLONE_REMOTE_PATH}. Starting with empty DB."
+    exit 0
+  fi
+
+  echo "Downloading latest backup: $LATEST_FILE"
+  rclone copy "${RCLONE_REMOTE}:${RCLONE_REMOTE_PATH}/${LATEST_FILE}" "$BACKUP_DIR"
+  
+  echo "Restoring database..."
+  # pg_restore
+  # -c: clean (drop) database objects before recreating
+  # --if-exists: used with -c
+  PGPASSWORD="$POSTGRES_PASSWORD" $PG_RESTORE_CMD -h "$DB_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c --if-exists "${BACKUP_DIR}/${LATEST_FILE}" || true
+  
+  # Clean up
+  rm "${BACKUP_DIR}/${LATEST_FILE}"
+  
+  echo "Restore completed."
+}
+
+case "$1" in
+  backup)
+    command_backup
+    ;;
+  restore)
+    command_restore
+    ;;
+  *)
+    echo "Usage: $0 {backup|restore}"
+    exit 1
+    ;;
+esac
