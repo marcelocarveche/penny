@@ -121,11 +121,11 @@ class Demo::Generator
     def create_family_and_users!(family_name, email, onboarded:, subscribed:)
       family = Family.create!(
         name: family_name,
-        currency: "USD",
-        locale: "en",
-        country: "US",
-        timezone: "America/New_York",
-        date_format: "%m-%d-%Y"
+        currency: "BRL",
+        locale: "pt-BR",
+        country: "BR",
+        timezone: "America/Sao_Paulo",
+        date_format: "%d/%m/%Y"
       )
 
       family.start_subscription!("sub_demo_123") if subscribed

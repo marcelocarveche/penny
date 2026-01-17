@@ -22,7 +22,7 @@ class Money
 
   class << self
     def default_currency
-      @default ||= Money::Currency.new(:usd)
+      @default ||= Money::Currency.new(:brl)
     end
 
     def default_currency=(object)

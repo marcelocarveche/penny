@@ -1,8 +1,8 @@
 <% mobile_nav_items = [
-  { name: "Home", path: root_path, icon: "pie-chart", icon_custom: false, active: page_active?(root_path) },
-  { name: "Transactions", path: transactions_path, icon: "credit-card", icon_custom: false, active: page_active?(transactions_path) },
-  { name: "Budgets", path: budgets_path, icon: "map", icon_custom: false, active: page_active?(budgets_path) },
-  { name: "Assistant", path: chats_path, icon: "icon-assistant", icon_custom: true, active: page_active?(chats_path), mobile_only: true }
+  { name: "Início", path: root_path, icon: "pie-chart", icon_custom: false, active: page_active?(root_path) },
+  { name: "Transações", path: transactions_path, icon: "credit-card", icon_custom: false, active: page_active?(transactions_path) },
+  { name: "Orçamentos", path: budgets_path, icon: "map", icon_custom: false, active: page_active?(budgets_path) },
+  { name: "Assistente", path: chats_path, icon: "icon-assistant", icon_custom: true, active: page_active?(chats_path), mobile_only: true }
 ] %>
 
 <% desktop_nav_items = mobile_nav_items.reject { |item| item[:mobile_only] } %>
@@ -36,7 +36,7 @@
       <%= icon("panel-left", as_button: true, data: { action: "app-layout#openMobileSidebar"}) %>
 
       <%= link_to root_path, class: "block" do %>
-        <%= image_tag "logomark-color.svg", class: "w-9 h-9 mx-auto" %>
+        <%= image_tag "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", class: "w-9 h-9 mx-auto" %>
       <% end %>
 
       <%= render "users/user_menu", user: Current.user, placement: "bottom-end", offset: 12 %>
@@ -47,7 +47,7 @@
       <nav class="h-full flex flex-col shrink-0 w-[84px] py-4 mr-3">
         <div class="pl-2 mb-3">
           <%= link_to root_path, class: "block" do %>
-            <%= image_tag "logomark-color.svg", class: "w-9 h-9 mx-auto" %>
+            <%= image_tag "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", class: "w-9 h-9 mx-auto" %>
           <% end %>
         </div>
 
@@ -89,12 +89,12 @@
             <div class="px-4 py-3 space-y-4 bg-container shadow-border-xs rounded-xl">
               <div class="flex items-start justify-between">
                 <div>
-                  <p class="text-sm font-medium text-primary">Free trial</p>
-                  <p class="text-sm text-secondary"><%= Current.family.days_left_in_trial %> days remaining</p>
+                  <p class="text-sm font-medium text-primary">Teste gratuito</p>
+                  <p class="text-sm text-secondary"><%= Current.family.days_left_in_trial %> dias restantes</p>
                 </div>
 
                 <%= render DS::Link.new(
-                  text: "Upgrade",
+                  text: "Atualizar",
                   href: upgrade_subscription_path,
                 ) %>
               </div>
@@ -111,6 +111,15 @@
 
     <%# SHARED - Main content %>
     <%= tag.main class: class_names("grow overflow-y-auto px-3 lg:px-10 py-4 w-full mx-auto max-w-5xl"), data: { app_layout_target: "content" } do %>
+      <%# AGPLv3 Compliance - Source Code Link %>
+      <div class="hidden lg:flex justify-end mb-2">
+        <div class="text-gray-500 whitespace-nowrap" style="font-size: 0.45rem !important;">
+          <%= link_to "Código-Fonte", "https://github.com/marcelocarveche/penny", target: "_blank", rel: "noopener noreferrer", class: "hover:text-gray-400 transition-colors", style: "font-size: 0.45rem !important;" %> 
+          <span class="mx-1">·</span>
+          <%= link_to "Baseado em Maybe", "https://github.com/maybe-finance/maybe", target: "_blank", rel: "noopener noreferrer", class: "hover:text-gray-400 transition-colors", style: "font-size: 0.45rem !important;" %>
+        </div>
+      </div>
+      
       <div class="hidden lg:flex gap-2 items-center justify-between mb-6">
         <div class="flex items-center gap-2">
           <%= icon("panel-left", as_button: true, data: { action: "app-layout#toggleLeftSidebar" }) %>
