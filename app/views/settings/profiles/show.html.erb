@@ -218,7 +218,7 @@
           <%= button_to "/auth/google_oauth2", method: :post, form: { data: { turbo: false } } do %>
             <%= render DS::Button.new(
               text: "Conectar",
-              variant: "destructive"
+              variant: "secondary"
             ) %>
           <% end %>
         </div>

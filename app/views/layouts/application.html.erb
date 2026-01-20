@@ -46,7 +46,7 @@
       <div class="flex items-center gap-2">
         <%= render "layouts/shared/last_backup_time" %>
 
-        <% if Current.family.google_drive_config.present? %>
+        <% if google_drive_connected? %>
           <%= form_with url: backup_path, method: :post, data: { controller: "backup", action: "turbo:submit-end->backup#reset", check_url: backup_check_path }, class: "flex" do %>
             <%= button_tag type: "submit", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Fazer Backup", data: { backup_target: "button", action: "click->backup#loading" } do %>
               <%= icon("cloud-upload") %>
@@ -159,7 +159,7 @@
           <%= turbo_stream_from "backup_status" %>
           <%= render "layouts/shared/last_backup_time" %>
 
-          <% if Current.family.google_drive_config.present? %>
+          <% if google_drive_connected? %>
             <%= form_with url: backup_path, method: :post, data: { controller: "backup", action: "turbo:submit-end->backup#reset", check_url: backup_check_path }, class: "flex" do %>
               <%= button_tag type: "submit", class: "inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-hover transition-all fg-gray", title: "Fazer Backup", data: { backup_target: "button", action: "click->backup#loading" } do %>
                 <%= icon("cloud-upload") %>

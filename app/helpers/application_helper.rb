@@ -1,6 +1,21 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def google_drive_connected?
+    return false if Current.family.google_drive_config.blank?
+
+    begin
+      config = JSON.parse(Current.family.google_drive_config)
+      expiry = config["expiry"]
+      return false if expiry.blank?
+
+      # Check if token has expired
+      Time.parse(expiry) > Time.current
+    rescue JSON::ParserError, ArgumentError
+      false
+    end
+  end
+
   def last_backup_time
     time = Rails.cache.read("last_backup_at")
     return "Nenhum backup" unless time

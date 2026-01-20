@@ -2,17 +2,17 @@
 <% last_backup_at ||= Rails.cache.read("last_backup_at") %>
 
 <span id="last_backup_time" class="text-xs text-gray-500" title="Último Backup">
-  <% if last_backup_at %>
+  <% if google_drive_connected? && last_backup_at %>
     <% diff = Time.current - last_backup_at %>
     <% 
       emoji = if diff < 3.minutes
-        "😲"
+        ":D"
       elsif diff < 6.minutes
-        "🙂"
+        ":)"
       elsif diff < 9.minutes
-        "😟"
+        ":/"
       else
-        "😨"
+        ":("
       end
     %>
 
@@ -26,15 +26,11 @@
       <%= "#{hours} #{'hora'.pluralize(hours, :pt)} atrás #{emoji}" %>
     <% elsif diff <= 10.days %>
       <% days = (diff / 1.day).to_i %>
-      <%= "#{days} #{'dia'.pluralize(days, :pt)} #{emoji}" %>
+      <%= "#{days} #{'dia'.pluralize(days, :pt)} atrás #{emoji}" %>
     <% else %>
-      há muito tempo :( <%= emoji %>
+      há muito tempo <%= emoji %>
     <% end %>
   <% else %>
-    <% if Current.family.google_drive_config.blank? %>
-      Backup não configurado
-    <% else %>
-      Nenhum backup
-    <% end %>
+    <%= link_to "Nenhum backup", settings_profile_path(anchor: "google-drive-backup"), class: "hover:underline" %>
   <% end %>
 </span>
