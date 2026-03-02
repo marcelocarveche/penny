@@ -1,3 +1,4 @@
+import { passkey } from "@better-auth/passkey";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import type { GoogleProfile } from "better-auth/social-providers";
@@ -82,6 +83,13 @@ export const auth = betterAuth({
 			enabled: false, // Disable for better Safari compatibility
 		},
 	},
+
+	// Plugins
+	plugins: [
+		passkey({
+			rpName: "OpenMonetis",
+		}),
+	],
 
 	// Google OAuth (se configurado)
 	socialProviders:

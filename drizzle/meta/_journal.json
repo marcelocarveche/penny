@@ -120,6 +120,13 @@
 			"when": 1771166328908,
 			"tag": "0016_complete_randall",
 			"breakpoints": true
+		},
+		{
+			"idx": 17,
+			"version": "7",
+			"when": 1772400510326,
+			"tag": "0017_previous_warstar",
+			"breakpoints": true
 		}
 	]
 }

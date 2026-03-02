@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { CompanionTab } from "@/components/ajustes/companion-tab";
 import { DeleteAccountForm } from "@/components/ajustes/delete-account-form";
+import { PasskeysForm } from "@/components/ajustes/passkeys-form";
 import { PreferencesForm } from "@/components/ajustes/preferences-form";
 import { UpdateEmailForm } from "@/components/ajustes/update-email-form";
 import { UpdateNameForm } from "@/components/ajustes/update-name-form";
@@ -39,6 +40,7 @@ export default async function Page() {
 							<TabsTrigger value="companion">Companion</TabsTrigger>
 							<TabsTrigger value="nome">Alterar nome</TabsTrigger>
 							<TabsTrigger value="senha">Alterar senha</TabsTrigger>
+							<TabsTrigger value="passkeys">Passkeys</TabsTrigger>
 							<TabsTrigger value="email">Alterar e-mail</TabsTrigger>
 							<TabsTrigger value="deletar" className="text-destructive">
 								Deletar conta
@@ -110,6 +112,21 @@ export default async function Page() {
 								</p>
 							</div>
 							<UpdatePasswordForm authProvider={authProvider} />
+						</div>
+					</Card>
+				</TabsContent>
+
+				<TabsContent value="passkeys" className="mt-4">
+					<Card className="p-6">
+						<div className="space-y-4">
+							<div>
+								<h2 className="text-lg font-bold mb-1">Passkeys</h2>
+								<p className="text-sm text-muted-foreground mb-4">
+									Passkeys permitem login sem senha, usando biometria (Face ID,
+									Touch ID, Windows Hello) ou chaves de segurança.
+								</p>
+							</div>
+							<PasskeysForm />
 						</div>
 					</Card>
 				</TabsContent>

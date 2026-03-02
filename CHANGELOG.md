@@ -5,6 +5,25 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.7.6] - 2026-03-02
+
+### Adicionado
+
+- Suporte completo a Passkeys (WebAuthn) com plugin `@better-auth/passkey` no servidor e `passkeyClient` no cliente de autenticação
+- Tabela `passkey` no banco de dados para persistência de credenciais WebAuthn vinculadas ao usuário
+- Nova aba **Passkeys** em `/ajustes` com gerenciamento de credenciais: listar, adicionar, renomear e remover passkeys
+- Ação de login com passkey na tela de autenticação (`/login`)
+
+### Alterado
+
+- `PasskeysForm` refatorado para melhor experiência com React 19/Next 16: detecção de suporte do navegador, bloqueio de ações simultâneas e atualização da lista sem loader global após operações
+
+### Corrigido
+
+- Login com passkey na tela de autenticação agora fica disponível em navegadores com WebAuthn, mesmo sem suporte a Conditional UI
+- Listagem de passkeys em Ajustes agora trata `createdAt` ausente sem gerar data inválida na interface
+- Migração `0017_previous_warstar` tornou-se idempotente para colunas de `preferencias_usuario` com `IF NOT EXISTS`, evitando falha em bancos já migrados
+
 ## [1.7.5] - 2026-02-28
 
 ### Adicionado

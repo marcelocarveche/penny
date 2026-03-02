@@ -1,7 +1,7 @@
 "use client";
-import { RiLoader4Line } from "@remixicon/react";
+import { RiFingerprintLine, RiLoader4Line } from "@remixicon/react";
 import { useRouter } from "next/navigation";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +33,32 @@ export function LoginForm({ className, ...props }: DivProps) {
 	const [error, setError] = useState("");
 	const [loadingEmail, setLoadingEmail] = useState(false);
 	const [loadingGoogle, setLoadingGoogle] = useState(false);
+	const [loadingPasskey, setLoadingPasskey] = useState(false);
+	const [passkeySupported, setPasskeySupported] = useState(false);
+
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		if (typeof PublicKeyCredential === "undefined") return;
+
+		setPasskeySupported(true);
+
+		if (
+			typeof PublicKeyCredential.isConditionalMediationAvailable === "function"
+		) {
+			PublicKeyCredential.isConditionalMediationAvailable()
+				.then((available) => {
+					if (available) {
+						// Conditional UI é opcional: habilita autofill quando disponível.
+						authClient.signIn.passkey({
+							mediation: "conditional",
+						});
+					}
+				})
+				.catch(() => {
+					// Ignora falhas de detecção e mantém login manual por passkey.
+				});
+		}
+	}, []);
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -97,6 +123,29 @@ export function LoginForm({ className, ...props }: DivProps) {
 		);
 	}
 
+	async function handlePasskey() {
+		setError("");
+		setLoadingPasskey(true);
+
+		const { error: passkeyError } = await authClient.signIn.passkey({
+			fetchOptions: {
+				onSuccess: () => {
+					setLoadingPasskey(false);
+					router.replace("/dashboard");
+				},
+				onError: (ctx) => {
+					setError(ctx.error.message);
+					setLoadingPasskey(false);
+				},
+			},
+		});
+
+		if (passkeyError) {
+			setError(passkeyError.message || "Erro ao entrar com passkey.");
+			setLoadingPasskey(false);
+		}
+	}
+
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
 			<Logo className="mb-2" />
@@ -118,7 +167,7 @@ export function LoginForm({ className, ...props }: DivProps) {
 									id="email"
 									type="email"
 									placeholder="Digite seu e-mail"
-									autoComplete="email"
+									autoComplete="username webauthn"
 									required
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
@@ -145,7 +194,7 @@ export function LoginForm({ className, ...props }: DivProps) {
 							<Field>
 								<Button
 									type="submit"
-									disabled={loadingEmail || loadingGoogle}
+									disabled={loadingEmail || loadingGoogle || loadingPasskey}
 									className="w-full"
 								>
 									{loadingEmail ? (
@@ -164,10 +213,34 @@ export function LoginForm({ className, ...props }: DivProps) {
 								<GoogleAuthButton
 									onClick={handleGoogle}
 									loading={loadingGoogle}
-									disabled={loadingEmail || loadingGoogle || !isGoogleAvailable}
+									disabled={
+										loadingEmail ||
+										loadingGoogle ||
+										loadingPasskey ||
+										!isGoogleAvailable
+									}
 									text="Entrar com Google"
 								/>
 							</Field>
+
+							{passkeySupported && (
+								<Field>
+									<Button
+										variant="outline"
+										type="button"
+										onClick={handlePasskey}
+										disabled={loadingEmail || loadingGoogle || loadingPasskey}
+										className="w-full gap-2"
+									>
+										{loadingPasskey ? (
+											<RiLoader4Line className="h-4 w-4 animate-spin" />
+										) : (
+											<RiFingerprintLine className="h-5 w-5" />
+										)}
+										<span>Entrar com Passkey</span>
+									</Button>
+								</Field>
+							)}
 
 							<FieldDescription className="text-center">
 								Não tem uma conta?{" "}
