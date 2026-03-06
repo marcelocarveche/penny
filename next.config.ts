@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
 	},
 	reactCompiler: true,
 	typescript: {
-		// TODO: Corrigir erros TS e remover. Erros pré-existentes em ~5 arquivos.
 		ignoreBuildErrors: true,
 	},
 	images: {

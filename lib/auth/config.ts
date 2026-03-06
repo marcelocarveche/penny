@@ -132,7 +132,6 @@ export const auth = betterAuth({
 							"[Auth] Falha ao criar dados padrão do usuário:",
 							error,
 						);
-						// TODO: Considere enfileirar para retry ou notificar admin
 					}
 				},
 			},
