@@ -64,9 +64,52 @@ services:
     # command: ["postgres", "-c", "log_statement=all"]
 
   # ============================================
+  # Serviço: Next.js DEV (hot reload, perfil dev)
+  # ============================================
+  dev:
+    image: node:20-alpine
+    container_name: openmonetis_dev
+    restart: unless-stopped
+    profiles:
+      - dev
+    working_dir: /app
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://${POSTGRES_USER:-openmonetis}:${POSTGRES_PASSWORD:-openmonetis_dev_password}@db:5432/${POSTGRES_DB:-openmonetis_db}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-dev-secret-change-me}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      RESEND_FROM_EMAIL: ${RESEND_FROM_EMAIL:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GOOGLE_GENERATIVE_AI_API_KEY: ${GOOGLE_GENERATIVE_AI_API_KEY:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - openmonetis_network
+    command: >
+      sh -c "
+        npm install -g pnpm --silent &&
+        pnpm install &&
+        pnpm drizzle-kit push &&
+        pnpm dev
+      "
+
+  # ============================================
   # Serviço: Aplicação Next.js
   # ============================================
   app:
+    profiles:
+      - prod
     build:
       context: .
       dockerfile: Dockerfile
