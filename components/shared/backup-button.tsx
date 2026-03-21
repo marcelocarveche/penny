@@ -67,6 +67,9 @@ export function BackupButton() {
 
 	return (
 		<div className="flex items-center gap-1.5">
+			<span className="text-xs text-muted-foreground whitespace-nowrap tabular-nums">
+				{isPending ? "fazendo backup..." : displayTime}
+			</span>
 			<Tooltip>
 				<TooltipTrigger asChild>
 					<button
@@ -94,9 +97,6 @@ export function BackupButton() {
 					{isPending ? "Fazendo backup..." : "Fazer backup na nuvem"}
 				</TooltipContent>
 			</Tooltip>
-			<span className="text-xs text-muted-foreground whitespace-nowrap tabular-nums">
-				{isPending ? "fazendo backup..." : displayTime}
-			</span>
 		</div>
 	);
 }
