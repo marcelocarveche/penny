@@ -8,8 +8,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
 	title: {
-		default: "OpenMonetis | Suas finanças, do seu jeito",
-		template: "%s | OpenMonetis",
+		default: "Penny | Suas finanças, do seu jeito",
+		template: "%s | Penny",
 	},
 	description:
 		"Controle suas finanças pessoais de forma simples e transparente.",
@@ -23,7 +23,7 @@ export default function RootLayout({
 	return (
 		<html lang="pt-BR" className={allFontVariables} suppressHydrationWarning>
 			<head>
-				<meta name="apple-mobile-web-app-title" content="OpenMonetis" />
+				<meta name="apple-mobile-web-app-title" content="Penny" />
 			</head>
 			<body className="subpixel-antialiased" suppressHydrationWarning>
 				<ThemeProvider attribute="class" defaultTheme="light">

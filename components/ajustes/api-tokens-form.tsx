@@ -141,7 +141,7 @@ export function ApiTokensForm({ tokens }: ApiTokensFormProps) {
 					<h3 className="font-medium">Dispositivos conectados</h3>
 					<p className="text-sm text-muted-foreground">
 						Gerencie os dispositivos que podem enviar notificações para o
-						OpenMonetis.
+						Penny.
 					</p>
 				</div>
 				<Dialog
@@ -163,7 +163,7 @@ export function ApiTokensForm({ tokens }: ApiTokensFormProps) {
 								<DialogHeader>
 									<DialogTitle>Criar Token de API</DialogTitle>
 									<DialogDescription>
-										Crie um token para conectar o OpenMonetis Companion no seu
+										Crie um token para conectar o Penny Companion no seu
 										dispositivo Android.
 									</DialogDescription>
 								</DialogHeader>
@@ -204,7 +204,7 @@ export function ApiTokensForm({ tokens }: ApiTokensFormProps) {
 								<DialogHeader>
 									<DialogTitle>Token Criado</DialogTitle>
 									<DialogDescription>
-										Copie o token abaixo e cole no app OpenMonetis Companion.
+										Copie o token abaixo e cole no app Penny Companion.
 										Este token
 										<strong> não será exibido novamente</strong>.
 									</DialogDescription>

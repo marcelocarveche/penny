@@ -262,7 +262,7 @@ export default async function Page() {
 
 						<div className="flex flex-col sm:flex-row gap-3 mt-2 w-full sm:w-auto px-4 sm:px-0">
 							<Link
-								href="https://github.com/felipegcoutinho/openmonetis"
+								href="https://github.com/felipegcoutinho/penny"
 								target="_blank"
 								className="w-full sm:w-auto"
 							>
@@ -272,7 +272,7 @@ export default async function Page() {
 								</Button>
 							</Link>
 							<Link
-								href="https://github.com/felipegcoutinho/openmonetis#readme"
+								href="https://github.com/felipegcoutinho/penny#readme"
 								target="_blank"
 								className="w-full sm:w-auto"
 							>
@@ -354,7 +354,7 @@ export default async function Page() {
 							<div>
 								<Image
 									src="/dashboard-preview-light.webp"
-									alt="openmonetis Dashboard Preview"
+									alt="penny Dashboard Preview"
 									width={1920}
 									height={1080}
 									className="w-full h-auto dark:hidden"
@@ -362,7 +362,7 @@ export default async function Page() {
 								/>
 								<Image
 									src="/dashboard-preview-dark.webp"
-									alt="openmonetis Dashboard Preview"
+									alt="penny Dashboard Preview"
 									width={1920}
 									height={1080}
 									className="w-full h-auto hidden dark:block"
@@ -387,7 +387,7 @@ export default async function Page() {
 									Veja o que você pode fazer
 								</h2>
 								<p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
-									Explore as principais telas do OpenMonetis
+									Explore as principais telas do Penny
 								</p>
 							</div>
 						</AnimateOnScroll>
@@ -524,7 +524,7 @@ export default async function Page() {
 										Capture automaticamente do seu celular
 									</h2>
 									<p className="text-base md:text-lg text-muted-foreground mb-6">
-										O OpenMonetis Companion captura notificações de apps
+										O Penny Companion captura notificações de apps
 										bancários e cria pré-lançamentos automaticamente para você
 										revisar.
 									</p>
@@ -566,7 +566,7 @@ export default async function Page() {
 											</div>
 											<div>
 												<p className="text-sm font-medium">
-													Revise e confirme no OpenMonetis
+													Revise e confirme no Penny
 												</p>
 												<p className="text-xs text-muted-foreground">
 													Pré-lançamentos ficam na inbox para sua aprovação
@@ -593,7 +593,7 @@ export default async function Page() {
 									</div>
 
 									<Link
-										href="https://github.com/felipegcoutinho/openmonetis-companion"
+										href="https://github.com/felipegcoutinho/penny-companion"
 										target="_blank"
 									>
 										<Button variant="outline" className="gap-2">
@@ -607,8 +607,8 @@ export default async function Page() {
 								<div className="order-1 md:order-2 flex items-center justify-center">
 									<div className="w-full max-w-[220px] md:max-w-[260px]">
 										<Image
-											src="/openmonetis_companion.webp"
-											alt="OpenMonetis Companion App"
+											src="/penny_companion.webp"
+											alt="Penny Companion App"
 											width={1080}
 											height={2217}
 											className="w-full h-auto rounded-2xl"
@@ -768,7 +768,7 @@ export default async function Page() {
 
 						<div className="mt-6 md:mt-8 text-center">
 							<Link
-								href="https://github.com/felipegcoutinho/openmonetis#-início-rápido"
+								href="https://github.com/felipegcoutinho/penny#-início-rápido"
 								target="_blank"
 								className="text-sm text-primary hover:underline"
 							>
@@ -789,7 +789,7 @@ export default async function Page() {
 									Para quem funciona?
 								</h2>
 								<p className="text-base md:text-lg text-muted-foreground px-4 sm:px-0">
-									O openmonetis funciona melhor se você:
+									O penny funciona melhor se você:
 								</p>
 							</div>
 						</AnimateOnScroll>
@@ -892,7 +892,7 @@ export default async function Page() {
 							</p>
 							<div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
 								<Link
-									href="https://github.com/felipegcoutinho/openmonetis"
+									href="https://github.com/felipegcoutinho/penny"
 									target="_blank"
 									className="w-full sm:w-auto"
 								>
@@ -902,7 +902,7 @@ export default async function Page() {
 									</Button>
 								</Link>
 								<Link
-									href="https://github.com/felipegcoutinho/openmonetis#-início-rápido"
+									href="https://github.com/felipegcoutinho/penny#-início-rápido"
 									target="_blank"
 									className="w-full sm:w-auto"
 								>
@@ -938,7 +938,7 @@ export default async function Page() {
 								<ul className="space-y-2.5 md:space-y-3 text-sm text-muted-foreground">
 									<li>
 										<Link
-											href="https://github.com/felipegcoutinho/openmonetis"
+											href="https://github.com/felipegcoutinho/penny"
 											target="_blank"
 											className="hover:text-foreground transition-colors flex items-center gap-2"
 										>
@@ -948,7 +948,7 @@ export default async function Page() {
 									</li>
 									<li>
 										<Link
-											href="https://github.com/felipegcoutinho/openmonetis#readme"
+											href="https://github.com/felipegcoutinho/penny#readme"
 											target="_blank"
 											className="hover:text-foreground transition-colors"
 										>
@@ -957,7 +957,7 @@ export default async function Page() {
 									</li>
 									<li>
 										<Link
-											href="https://github.com/felipegcoutinho/openmonetis/issues"
+											href="https://github.com/felipegcoutinho/penny/issues"
 											target="_blank"
 											className="hover:text-foreground transition-colors"
 										>
@@ -972,7 +972,7 @@ export default async function Page() {
 								<ul className="space-y-2.5 md:space-y-3 text-sm text-muted-foreground">
 									<li>
 										<Link
-											href="https://github.com/felipegcoutinho/openmonetis-companion"
+											href="https://github.com/felipegcoutinho/penny-companion"
 											target="_blank"
 											className="hover:text-foreground transition-colors flex items-center gap-2"
 										>
@@ -992,7 +992,7 @@ export default async function Page() {
 
 						<div className="border-t mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4 text-sm text-muted-foreground">
 							<p>
-								© {new Date().getFullYear()} openmonetis. Projeto open source
+								© {new Date().getFullYear()} penny. Projeto open source
 								sob licença.
 							</p>
 							<div className="flex items-center gap-2">

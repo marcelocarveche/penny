@@ -316,7 +316,7 @@ const resolveUserLabel = (user: {
 	if (user?.email && user.email.trim().length > 0) {
 		return user.email;
 	}
-	return "OpenMonetis";
+	return "Penny";
 };
 
 type InitialCandidate = {

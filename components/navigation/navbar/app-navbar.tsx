@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { AnimatedThemeToggler } from "@/components/animated-theme-toggler";
 import { Logo } from "@/components/logo";
@@ -7,8 +8,11 @@ import { NotificationBell } from "@/components/notificacoes/notification-bell";
 import { RefreshPageButton } from "@/components/shared/refresh-page-button";
 import type { DashboardNotificationsSnapshot } from "@/lib/dashboard/notifications";
 import { BackupButton } from "@/components/shared/backup-button";
-import { NavMenu } from "./nav-menu";
 import { NavbarUser } from "./navbar-user";
+
+const NavMenu = dynamic(() => import("./nav-menu").then((m) => m.NavMenu), {
+	ssr: false,
+});
 
 type AppNavbarProps = {
 	user: {

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
-const GITHUB_REPO_BASE = "https://github.com/felipegcoutinho/openmonetis";
+const GITHUB_REPO_BASE = "https://github.com/felipegcoutinho/penny";
 const GITHUB_DISCUSSIONS_BASE = `${GITHUB_REPO_BASE}/discussions/new`;
 const GITHUB_ISSUES_URL = `${GITHUB_REPO_BASE}/issues/new`;
 
@@ -49,7 +49,7 @@ const feedbackCategories = [
 		id: "experience",
 		title: "Compartilhar Experiência",
 		icon: RiStarLine,
-		description: "Como o OpenMonetis tem ajudado você?",
+		description: "Como o Penny tem ajudado você?",
 		color: "text-purple-500 dark:text-purple-400",
 		url: `${GITHUB_DISCUSSIONS_BASE}?category=sua-experiencia`,
 	},

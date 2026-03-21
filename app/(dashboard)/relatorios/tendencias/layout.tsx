@@ -2,7 +2,7 @@ import { RiFileChartLine } from "@remixicon/react";
 import PageDescription from "@/components/shared/page-description";
 
 export const metadata = {
-	title: "Tendências | OpenMonetis",
+	title: "Tendências | Penny",
 };
 
 export default function RootLayout({

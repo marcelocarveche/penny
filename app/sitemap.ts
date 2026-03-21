@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const BASE_URL = process.env.PUBLIC_DOMAIN
 	? `https://${process.env.PUBLIC_DOMAIN}`
-	: "https://openmonetis.com";
+	: "https://penny.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	return [

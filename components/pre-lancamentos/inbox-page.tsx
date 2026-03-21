@@ -279,7 +279,7 @@ export function InboxPage({
 			<EmptyState
 				media={<RiAtLine className="size-6 text-primary" />}
 				title={message}
-				description="As notificações capturadas pelo app OpenMonetis Companion aparecerão aqui. Saiba mais em Ajustes > Companion."
+				description="As notificações capturadas pelo app Penny Companion aparecerão aqui. Saiba mais em Ajustes > Companion."
 			/>
 		</Card>
 	);

@@ -8,7 +8,7 @@
 #
 # Requer:
 #   - rclone instalado e configurado (make setup-rclone para instruções)
-#   - RCLONE_REMOTE e RCLONE_PATH definidos no .env (padrão: gdrive / openmonetis/backups)
+#   - RCLONE_REMOTE e RCLONE_PATH definidos no .env (padrão: gdrive / penny/backups)
 
 set -euo pipefail
 
@@ -28,11 +28,11 @@ get_env() {
   fi
 }
 
-PG_USER=$(get_env POSTGRES_USER openmonetis)
-PG_DB=$(get_env POSTGRES_DB openmonetis_db)
-CONTAINER="openmonetis_postgres"
+PG_USER=$(get_env POSTGRES_USER penny)
+PG_DB=$(get_env POSTGRES_DB penny_db)
+CONTAINER="penny_postgres"
 REMOTE=$(get_env RCLONE_REMOTE gdrive)
-REMOTE_PATH=$(get_env RCLONE_PATH openmonetis/backups)
+REMOTE_PATH=$(get_env RCLONE_PATH penny/backups)
 
 LOCAL_DIR="${ROOT_DIR}/backups"
 FILE="${LOCAL_DIR}/latest.sql"

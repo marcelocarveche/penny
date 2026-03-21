@@ -26,9 +26,9 @@ get_env() {
   fi
 }
 
-PG_USER=$(get_env POSTGRES_USER openmonetis)
-PG_DB=$(get_env POSTGRES_DB openmonetis_db)
-CONTAINER="openmonetis_postgres"
+PG_USER=$(get_env POSTGRES_USER penny)
+PG_DB=$(get_env POSTGRES_DB penny_db)
+CONTAINER="penny_postgres"
 
 mkdir -p "${ROOT_DIR}/backups"
 

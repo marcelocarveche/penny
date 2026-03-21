@@ -2,7 +2,7 @@ import { RiSecurePaymentLine } from "@remixicon/react";
 import PageDescription from "@/components/shared/page-description";
 
 export const metadata = {
-	title: "Análise de Parcelas | OpenMonetis",
+	title: "Análise de Parcelas | Penny",
 };
 
 export default function RootLayout({

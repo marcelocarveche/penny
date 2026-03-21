@@ -204,7 +204,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - Painel do pagador reorganizado em grid de 3 colunas com cards de Faturas, Boletos e Status de Pagamento
 - `PagadorBoletoCard` refatorado para exibir lista de boletos individuais em vez de resumo agregado
 - Imagens da landing page convertidas de PNG para WebP (melhora de performance)
-- Template de título dinâmico no layout raiz (`%s | OpenMonetis`)
+- Template de título dinâmico no layout raiz (`%s | Penny`)
 
 ## [1.5.2] - 2026-02-16
 
@@ -223,7 +223,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 - Menu hamburger mobile com Sheet drawer (`components/landing/mobile-nav.tsx`)
 - Animações de fade-in no scroll via Intersection Observer (`components/landing/animate-on-scroll.tsx`)
-- Seção dedicada ao OpenMonetis Companion com screenshot do app, fluxo de captura e bancos suportados
+- Seção dedicada ao Penny Companion com screenshot do app, fluxo de captura e bancos suportados
 - Galeria "Conheça as telas" com screenshots de Lançamentos, Calendário e Cartões
 - Link "Conheça as telas" na navegação (desktop e mobile)
 - Componente de tabs para setup (`components/landing/setup-tabs.tsx`)
@@ -232,9 +232,9 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ### Alterado
 
-- Projeto renomeado de **OpenSheets** para **OpenMonetis** em todo o codebase (~40 arquivos): package.json, manifests, layouts, componentes, server actions, emails, Docker, docs e landing page
-- URLs do repositório atualizados de `opensheets-app` para `openmonetis`
-- Docker image renomeada para `felipegcoutinho/openmonetis`
+- Projeto renomeado de **OpenSheets** para **Penny** em todo o codebase (~40 arquivos): package.json, manifests, layouts, componentes, server actions, emails, Docker, docs e landing page
+- URLs do repositório atualizados de `opensheets-app` para `penny`
+- Docker image renomeada para `felipegcoutinho/penny`
 - Logo textual atualizado (`logo_text.png`)
 
 ### Adicionado

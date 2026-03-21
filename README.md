@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="./public/logo_small.png" alt="OpenMonetis Logo" height="80" />
+  <img src="./public/logo_small.png" alt="Penny Logo" height="80" />
 </p>
 
 <p align="center">
   Projeto pessoal de gestão financeira. Self-hosted, manual e open source.
 </p>
 
-> **📢 Este projeto foi renomeado de OpenSheets para OpenMonetis.** Se você conhecia o projeto pelo nome anterior, é o mesmo — só mudou o nome!
+> **📢 Este projeto foi renomeado de OpenSheets para Penny.** Se você conhecia o projeto pelo nome anterior, é o mesmo — só mudou o nome!
 
 > **⚠️ Não há versão online hospedada.** Você precisa clonar o repositório e rodar localmente ou no seu próprio servidor.
 
@@ -14,7 +14,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-blue?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=flat-square&logo=docker)](https://www.docker.com/)
-[![Android Companion](https://img.shields.io/badge/Companion-Android-3DDC84?style=flat-square&logo=android)](https://github.com/felipegcoutinho/openmonetis-companion)
+[![Android Companion](https://img.shields.io/badge/Companion-Android-3DDC84?style=flat-square&logo=android)](https://github.com/felipegcoutinho/penny-companion)
 [![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-orange?style=flat-square&logo=creative-commons)](LICENSE)
 [![Sponsor](https://img.shields.io/badge/Sponsor-❤️-ea4aaa?style=flat-square&logo=github-sponsors)](https://github.com/sponsors/felipegcoutinho)
 
@@ -42,7 +42,7 @@
 
 ## 🎯 Sobre o Projeto
 
-**OpenMonetis** é um projeto pessoal de gestão financeira que criei para organizar minhas próprias finanças. Cansei de usar planilhas desorganizadas e aplicativos que não fazem exatamente o que preciso, então decidi construir algo do jeito que funciona pra mim.
+**Penny** é um projeto pessoal de gestão financeira que criei para organizar minhas próprias finanças. Cansei de usar planilhas desorganizadas e aplicativos que não fazem exatamente o que preciso, então decidi construir algo do jeito que funciona pra mim.
 
 A ideia é simples: ter um lugar onde consigo ver todas as minhas contas, cartões, gastos e receitas de forma clara. Se isso for útil pra você também, fique à vontade para usar e contribuir.
 
@@ -54,7 +54,7 @@ A ideia é simples: ter um lugar onde consigo ver todas as minhas contas, cartõ
 
 **2. Não há Open Finance** — Você precisa registrar manualmente suas transações.
 
-**3. Requer disciplina** — O OpenMonetis funciona melhor para quem tem disciplina de registrar os gastos regularmente, quer controle total sobre seus dados e gosta de entender exatamente onde o dinheiro está indo.
+**3. Requer disciplina** — O Penny funciona melhor para quem tem disciplina de registrar os gastos regularmente, quer controle total sobre seus dados e gosta de entender exatamente onde o dinheiro está indo.
 
 ### Funcionalidades
 
@@ -76,7 +76,7 @@ A ideia é simples: ter um lugar onde consigo ver todas as minhas contas, cartõ
 
 📅 **Calendário financeiro** — Visualize todos os lançamentos em um calendário mensal.
 
-📲 **OpenMonetis Companion** — App Android que captura notificações bancárias (Nubank, Itaú, Bradesco, Inter, C6 e outros) e envia como pré-lançamentos para revisão. [Repositório](https://github.com/felipegcoutinho/openmonetis-companion).
+📲 **Penny Companion** — App Android que captura notificações bancárias (Nubank, Itaú, Bradesco, Inter, C6 e outros) e envia como pré-lançamentos para revisão. [Repositório](https://github.com/felipegcoutinho/penny-companion).
 
 ⚙️ **Personalização** — Tema dark/light, modo privacidade, fontes customizáveis, preferências por usuário.
 
@@ -104,8 +104,8 @@ A ideia é simples: ter um lugar onde consigo ver todas as minhas contas, cartõ
 1. **Clone e instale**
 
    ```bash
-   git clone https://github.com/felipegcoutinho/openmonetis.git
-   cd openmonetis
+   git clone https://github.com/felipegcoutinho/penny.git
+   cd penny
    pnpm install
    ```
 
@@ -119,7 +119,7 @@ A ideia é simples: ter um lugar onde consigo ver todas as minhas contas, cartõ
 
    ```env
    # Banco local (Docker): use host "localhost"
-   DATABASE_URL=postgresql://openmonetis:openmonetis_dev_password@localhost:5432/openmonetis_db
+   DATABASE_URL=postgresql://penny:penny_dev_password@localhost:5432/penny_db
 
    # Banco remoto (Supabase, Neon, etc): use a URL completa do provider
    # DATABASE_URL=postgresql://user:password@host:5432/database?sslmode=require
@@ -194,10 +194,10 @@ Health checks configurados para ambos os serviços (PostgreSQL via `pg_isready`,
 
 ```bash
 docker compose exec app sh                                      # Shell da aplicação
-docker compose exec db psql -U openmonetis -d openmonetis_db    # Shell do banco
+docker compose exec db psql -U penny -d penny_db    # Shell do banco
 docker compose ps                                                # Status
-docker compose exec db pg_dump -U openmonetis openmonetis_db > backup.sql  # Backup
-docker compose exec -T db psql -U openmonetis -d openmonetis_db < backup.sql  # Restore
+docker compose exec db pg_dump -U penny penny_db > backup.sql  # Backup
+docker compose exec -T db psql -U penny -d penny_db < backup.sql  # Restore
 ```
 
 ### Customizando Portas
@@ -216,7 +216,7 @@ Copie `.env.example` para `.env` e configure:
 ### Obrigatórias
 
 ```env
-DATABASE_URL=postgresql://openmonetis:openmonetis_dev_password@localhost:5432/openmonetis_db
+DATABASE_URL=postgresql://penny:penny_dev_password@localhost:5432/penny_db
 BETTER_AUTH_SECRET=seu-secret-aqui    # openssl rand -base64 32
 BETTER_AUTH_URL=http://localhost:3000
 ```
@@ -225,12 +225,12 @@ BETTER_AUTH_URL=http://localhost:3000
 
 ```env
 # PostgreSQL (Docker local)
-POSTGRES_USER=openmonetis
-POSTGRES_PASSWORD=openmonetis_dev_password
-POSTGRES_DB=openmonetis_db
+POSTGRES_USER=penny
+POSTGRES_PASSWORD=penny_dev_password
+POSTGRES_DB=penny_db
 
 # Multi-domínio (landing-only no domínio público)
-# PUBLIC_DOMAIN=openmonetis.com
+# PUBLIC_DOMAIN=penny.com
 
 # OAuth
 GOOGLE_CLIENT_ID=
@@ -252,7 +252,7 @@ OPENROUTER_API_KEY=
 ## 🏗️ Arquitetura
 
 ```
-openmonetis/
+penny/
 ├── app/                           # Next.js App Router
 │   ├── api/                       # API Routes (auth, health, inbox)
 │   ├── (auth)/                    # Login e cadastro
@@ -285,7 +285,7 @@ openmonetis/
 ## 🤝 Contribuindo
 
 1. **Fork** o projeto
-2. **Clone** seu fork: `git clone https://github.com/seu-usuario/openmonetis.git`
+2. **Clone** seu fork: `git clone https://github.com/seu-usuario/penny.git`
 3. **Crie uma branch:** `git checkout -b feature/minha-feature`
 4. **Commit:** `git commit -m 'feat: adiciona minha feature'`
 5. **Push:** `git push origin feature/minha-feature`
@@ -297,7 +297,7 @@ Use TypeScript, commits semânticos e documente features novas.
 
 ## 💖 Apoie o Projeto
 
-Se o **OpenMonetis** está sendo útil, considere se tornar um sponsor!
+Se o **Penny** está sendo útil, considere se tornar um sponsor!
 
 [![Sponsor no GitHub](https://img.shields.io/badge/Sponsor_no_GitHub-❤️-ea4aaa?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/felipegcoutinho)
 

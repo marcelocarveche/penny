@@ -431,7 +431,7 @@ export const insightsSalvos = pgTable(
 	}),
 );
 
-// ===================== OPENMONETIS COMPANION =====================
+// ===================== PENNY COMPANION =====================
 
 export const tokensApi = pgTable(
 	"tokens_api",

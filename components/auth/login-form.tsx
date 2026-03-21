@@ -140,7 +140,7 @@ export function LoginForm({ className, ...props }: DivProps) {
 						noValidate
 					>
 						<FieldGroup className="gap-4">
-							<AuthHeader title="Entrar no OpenMonetis" />
+							<AuthHeader title="Entrar no Penny" />
 
 							<AuthErrorAlert error={error} />
 

@@ -18,7 +18,7 @@ export function Logo({
 			<div className={cn("flex items-center gap-1", className)}>
 				<Image
 					src="/logo_small.png"
-					alt="OpenMonetis"
+					alt="Penny"
 					width={32}
 					height={32}
 					className="object-contain"
@@ -26,7 +26,7 @@ export function Logo({
 				/>
 				<Image
 					src="/logo_text.png"
-					alt="OpenMonetis"
+					alt="Penny"
 					width={110}
 					height={32}
 					className="object-contain dark:invert hidden sm:block"
@@ -40,7 +40,7 @@ export function Logo({
 		return (
 			<Image
 				src="/logo_small.png"
-				alt="OpenMonetis"
+				alt="Penny"
 				width={32}
 				height={32}
 				className={cn("object-contain", className)}
@@ -53,7 +53,7 @@ export function Logo({
 		<div className={cn("flex items-center gap-1.5 py-4", className)}>
 			<Image
 				src="/logo_small.png"
-				alt="OpenMonetis"
+				alt="Penny"
 				width={28}
 				height={28}
 				className="object-contain"
@@ -61,7 +61,7 @@ export function Logo({
 			/>
 			<Image
 				src="/logo_text.png"
-				alt="OpenMonetis"
+				alt="Penny"
 				width={100}
 				height={32}
 				className="object-contain dark:invert"

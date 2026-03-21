@@ -2,7 +2,7 @@ import { RiAtLine } from "@remixicon/react";
 import PageDescription from "@/components/shared/page-description";
 
 export const metadata = {
-	title: "Pré-Lançamentos | OpenMonetis",
+	title: "Pré-Lançamentos | Penny",
 };
 
 export default function RootLayout({

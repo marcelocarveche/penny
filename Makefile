@@ -3,7 +3,7 @@
 
 # Inicia em modo desenvolvimento (hot reload)
 dev:
-	docker compose --profile dev up
+	docker compose --profile dev up -d
 
 # Inicia em modo produção
 prod:
@@ -56,13 +56,13 @@ logs-db:
 # Exporta o banco para backups/penny_YYYY-MM-DD_HH-MM.sql
 backup:
 	mkdir -p backups
-	docker exec openmonetis_postgres pg_dump -U penny penny_db > backups/penny_$$(date +%Y-%m-%d_%H-%M).sql
+	docker exec penny_postgres pg_dump -U penny penny_db > backups/penny_$$(date +%Y-%m-%d_%H-%M).sql
 	@echo "Backup salvo em backups/"
 
 # Restaura o banco a partir de um arquivo (uso: make restore FILE=backups/penny_2024-01-01_12-00.sql)
 restore:
 	@test -n "$(FILE)" || (echo "Informe o arquivo: make restore FILE=backups/arquivo.sql" && exit 1)
-	docker exec -i openmonetis_postgres psql -U penny penny_db < $(FILE)
+	docker exec -i penny_postgres psql -U penny penny_db < $(FILE)
 	@echo "Restore concluido a partir de $(FILE)"
 
 # Backup local + upload para Google Drive
@@ -91,7 +91,7 @@ setup-rclone:
 	@echo ""
 	@echo "3. Adicionar ao .env (opcional, esses são os padrões):"
 	@echo "   RCLONE_REMOTE=gdrive"
-	@echo "   RCLONE_PATH=openmonetis/backups"
+	@echo "   RCLONE_PATH=penny/backups"
 	@echo ""
 	@echo "4. Copiar config para o projeto (necessário para o container dev):"
 	@echo "   make setup-rclone-copy"

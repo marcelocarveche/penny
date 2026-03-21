@@ -2,7 +2,7 @@ import { RiBankCard2Line } from "@remixicon/react";
 import PageDescription from "@/components/shared/page-description";
 
 export const metadata = {
-	title: "Uso de Cartões | OpenMonetis",
+	title: "Uso de Cartões | Penny",
 };
 
 export default function RootLayout({

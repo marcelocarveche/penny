@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 
 const BASE_URL = process.env.PUBLIC_DOMAIN
 	? `https://${process.env.PUBLIC_DOMAIN}`
-	: "https://openmonetis.com";
+	: "https://penny.com";
 
-const TITLE = "OpenMonetis | Finanças pessoais self-hosted e open source";
+const TITLE = "Penny | Finanças pessoais self-hosted e open source";
 const DESCRIPTION =
 	"Aplicativo self-hosted de finanças pessoais. Controle lançamentos, cartões, orçamentos e categorias com total privacidade. Open source e gratuito.";
 
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 		type: "website",
 		locale: "pt_BR",
 		url: "/",
-		siteName: "OpenMonetis",
+		siteName: "Penny",
 		title: TITLE,
 		description: DESCRIPTION,
 		images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 				url: "/dashboard-preview-light.webp",
 				width: 1920,
 				height: 1080,
-				alt: "OpenMonetis — Dashboard de finanças pessoais",
+				alt: "Penny — Dashboard de finanças pessoais",
 			},
 		],
 	},
@@ -65,7 +65,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "SoftwareApplication",
-		name: "OpenMonetis",
+		name: "Penny",
 		applicationCategory: "FinanceApplication",
 		operatingSystem: "Web",
 		offers: {
@@ -78,7 +78,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
 		isAccessibleForFree: true,
 		author: {
 			"@type": "Organization",
-			name: "OpenMonetis",
+			name: "Penny",
 			url: BASE_URL,
 		},
 	};

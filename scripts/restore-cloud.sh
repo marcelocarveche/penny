@@ -28,11 +28,11 @@ get_env() {
   fi
 }
 
-PG_USER=$(get_env POSTGRES_USER openmonetis)
-PG_DB=$(get_env POSTGRES_DB openmonetis_db)
-CONTAINER="openmonetis_postgres"
+PG_USER=$(get_env POSTGRES_USER penny)
+PG_DB=$(get_env POSTGRES_DB penny_db)
+CONTAINER="penny_postgres"
 REMOTE=$(get_env RCLONE_REMOTE gdrive)
-REMOTE_PATH=$(get_env RCLONE_PATH openmonetis/backups)
+REMOTE_PATH=$(get_env RCLONE_PATH penny/backups)
 LOCAL_DIR="${ROOT_DIR}/backups"
 
 echo "=== Restore Cloud ==="
