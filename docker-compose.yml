@@ -88,9 +88,12 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       GOOGLE_GENERATIVE_AI_API_KEY: ${GOOGLE_GENERATIVE_AI_API_KEY:-}
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      # rclone lê o config de backups/rclone.conf (copiado do host via make setup-rclone)
+      RCLONE_CONFIG: /app/backups/rclone.conf
     volumes:
       - .:/app
       - /app/node_modules
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       db:
         condition: service_healthy
@@ -98,6 +101,7 @@ services:
       - openmonetis_network
     command: >
       sh -c "
+        apk add --no-cache bash docker-cli rclone &&
         npm install -g pnpm --silent &&
         pnpm install &&
         pnpm drizzle-kit push &&

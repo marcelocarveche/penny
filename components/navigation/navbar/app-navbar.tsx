@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { AnimatedThemeToggler } from "@/components/animated-theme-toggler";
 import { Logo } from "@/components/logo";
 import { NotificationBell } from "@/components/notificacoes/notification-bell";
 import { RefreshPageButton } from "@/components/shared/refresh-page-button";
 import type { DashboardNotificationsSnapshot } from "@/lib/dashboard/notifications";
+import { BackupButton } from "@/components/shared/backup-button";
 import { NavMenu } from "./nav-menu";
 import { NavbarUser } from "./navbar-user";
 
@@ -38,6 +41,7 @@ export function AppNavbar({
 
 				{/* Right-side actions */}
 				<div className="ml-auto flex items-center gap-2">
+					<BackupButton />
 					<NotificationBell
 						notifications={notificationsSnapshot.notifications}
 						totalCount={notificationsSnapshot.totalCount}

@@ -47,7 +47,13 @@ export async function fetchInvoiceData(
 	invoiceStatus: InvoicePaymentStatus;
 	paymentDate: Date | null;
 }> {
-	const [invoiceRow, totalRow] = await Promise.all([
+	const baseWhere = and(
+		eq(lancamentos.userId, userId),
+		eq(lancamentos.cartaoId, cartaoId),
+		eq(lancamentos.period, selectedPeriod),
+	);
+
+	const [invoiceRow, despesasRow, receitasRow] = await Promise.all([
 		db.query.faturas.findFirst({
 			columns: {
 				id: true,
@@ -61,18 +67,16 @@ export async function fetchInvoiceData(
 			),
 		}),
 		db
-			.select({ totalAmount: sum(lancamentos.amount) })
+			.select({ total: sum(lancamentos.amount) })
 			.from(lancamentos)
-			.where(
-				and(
-					eq(lancamentos.userId, userId),
-					eq(lancamentos.cartaoId, cartaoId),
-					eq(lancamentos.period, selectedPeriod),
-				),
-			),
+			.where(and(baseWhere, eq(lancamentos.transactionType, "despesa"))),
+		db
+			.select({ total: sum(lancamentos.amount) })
+			.from(lancamentos)
+			.where(and(baseWhere, eq(lancamentos.transactionType, "receita"))),
 	]);
 
-	const totalAmount = toNumber(totalRow[0]?.totalAmount);
+	const totalAmount = toNumber(despesasRow[0]?.total) - toNumber(receitasRow[0]?.total);
 	const isInvoiceStatus = (
 		value: string | null | undefined,
 	): value is InvoicePaymentStatus =>

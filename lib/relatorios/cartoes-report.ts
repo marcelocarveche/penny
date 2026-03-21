@@ -23,7 +23,7 @@ import { PAGADOR_ROLE_ADMIN } from "@/lib/pagadores/constants";
 import { safeToNumber } from "@/lib/utils/number";
 import { getPreviousPeriod } from "@/lib/utils/period";
 
-const DESPESA = "Despesa";
+const DESPESA = "despesa";
 
 export type CardSummary = {
 	id: string;
