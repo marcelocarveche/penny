@@ -261,7 +261,7 @@ export function LancamentoDialog({
 					toast.error(message);
 					return;
 				}
-			} else if (!formState.contaId) {
+			} else if (!formState.contaId && mode !== "update") {
 				const message = "Selecione a conta.";
 				setErrorMessage(message);
 				toast.error(message);
@@ -498,14 +498,12 @@ export function LancamentoDialog({
 							Condições e anotações
 						</CollapsibleTrigger>
 						<CollapsibleContent className="space-y-3 pt-3">
-							{!isUpdateMode ? (
-								<ConditionSection
-									formState={formState}
-									onFieldChange={handleFieldChange}
-									showInstallments={showInstallments}
-									showRecurrence={showRecurrence}
-								/>
-							) : null}
+							<ConditionSection
+								formState={formState}
+								onFieldChange={handleFieldChange}
+								showInstallments={showInstallments}
+								showRecurrence={showRecurrence}
+							/>
 
 							<NoteSection
 								formState={formState}

@@ -308,7 +308,7 @@ export function PaymentMethodSection({
 						</div>
 					) : null}
 
-					{!isCartaoSelected && showContaSelect ? (
+					{!isCartaoSelected ? (
 						<div
 							className={cn(
 								"space-y-1 w-full",

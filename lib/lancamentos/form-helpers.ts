@@ -142,14 +142,13 @@ export function buildLancamentoInitialState(
 			? getTodayDateString()
 			: "");
 
-	// Calcular o valor correto para importação de parcelados
+	// Calcular o valor correto para importação/edição de parcelados
 	let amountValue = overrides?.defaultAmount ?? "";
 	if (!amountValue && typeof lancamento?.amount === "number") {
 		let baseAmount = Math.abs(lancamento.amount);
 
-		// Se está importando e é parcelado, usar o valor total (parcela * quantidade)
+		// Se é parcelado (importando ou editando), usar o valor total (parcela * quantidade)
 		if (
-			isImporting &&
 			lancamento.condition === "Parcelado" &&
 			lancamento.installmentCount
 		) {

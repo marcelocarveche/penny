@@ -281,11 +281,34 @@ const refineLancamento = (
 };
 
 const createSchema = baseFields.superRefine(refineLancamento);
+const refineUpdateLancamento = (
+	data: z.infer<typeof baseFields> & { id?: string },
+	ctx: z.RefinementCtx,
+) => {
+	if (!data.categoriaId) {
+		ctx.addIssue({
+			code: z.ZodIssueCode.custom,
+			path: ["categoriaId"],
+			message: "Selecione uma categoria.",
+		});
+	}
+
+	if (data.paymentMethod === "Cartão de crédito") {
+		if (!data.cartaoId) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				path: ["cartaoId"],
+				message: "Selecione o cartão.",
+			});
+		}
+	}
+};
+
 const updateSchema = baseFields
 	.extend({
 		id: uuidSchema("Lançamento"),
 	})
-	.superRefine(refineLancamento);
+	.superRefine(refineUpdateLancamento);
 
 const deleteSchema = z.object({
 	id: uuidSchema("Lançamento"),
@@ -817,7 +840,12 @@ export async function updateLancamentoAction(
 
 		const period = resolvePeriod(data.purchaseDate, data.period);
 		const amountSign: 1 | -1 = data.transactionType === "Despesa" ? -1 : 1;
-		const amountCents = Math.round(Math.abs(data.amount) * 100);
+		const totalAmountCents = Math.round(Math.abs(data.amount) * 100);
+		const installmentDivisor =
+			data.condition === "Parcelado" && data.installmentCount
+				? data.installmentCount
+				: 1;
+		const amountCents = Math.round(totalAmountCents / installmentDivisor);
 		const normalizedAmount = centsToDecimalString(amountCents * amountSign);
 		const normalizedSettled =
 			data.paymentMethod === "Cartão de crédito"

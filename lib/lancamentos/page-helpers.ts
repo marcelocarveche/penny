@@ -400,6 +400,14 @@ type LancamentoRowWithRelations = typeof lancamentos.$inferSelect & {
 	categoria?: CategoriaRow | null;
 };
 
+const PAYMENT_METHOD_ALIASES: Record<string, string> = {
+	credito: "Cartão de crédito",
+	debito: "Cartão de débito",
+};
+
+const normalizePaymentMethod = (value: string | null | undefined): string =>
+	(value && PAYMENT_METHOD_ALIASES[value]) || value || "";
+
 export const mapLancamentosData = (rows: LancamentoRowWithRelations[]) =>
 	rows.map((item) => ({
 		id: item.id,
@@ -410,7 +418,7 @@ export const mapLancamentosData = (rows: LancamentoRowWithRelations[]) =>
 		transactionType: item.transactionType,
 		amount: Number(item.amount ?? 0),
 		condition: item.condition,
-		paymentMethod: item.paymentMethod,
+		paymentMethod: normalizePaymentMethod(item.paymentMethod),
 		pagadorId: item.pagadorId ?? null,
 		pagadorName: item.pagador?.name ?? null,
 		pagadorAvatar: item.pagador?.avatarUrl ?? null,
