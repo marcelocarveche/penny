@@ -197,7 +197,7 @@ function mapTransaction(
     tx.type === "CHECK" ||
     (accountType === "cartao" && tx.amount < 0 && tx.type !== "CREDIT");
 
-  const transactionType: "despesa" | "receita" = isDebit ? "despesa" : "receita";
+  const transactionType: "Despesa" | "Receita" = isDebit ? "Despesa" : "Receita";
   const paymentMethod = accountType === "cartao" ? "credito" : "debito";
   const name = cleanName(tx.memo);
   const amount = String(Math.abs(tx.amount).toFixed(2));

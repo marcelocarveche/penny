@@ -29,7 +29,7 @@ Regras:
 - "currentInstallment": número da parcela atual como inteiro (null se "À vista")
 - "installmentCount": total de parcelas como inteiro (null se "À vista")
 - "paymentMethod": sempre "credito"
-- "transactionType": "despesa" para compras, "receita" para estornos/créditos
+- "transactionType": "Despesa" para compras, "Receita" para estornos/créditos
 - "isSettled": sempre true
 - "categoriaSugerida": escolha UMA: Alimentacao, Mercado, Transporte, Combustivel, Saude, Farmacia, Educacao, Lazer, Viagem, Moradia, Contas e Servicos, Assinaturas, Vestuario, Eletronicos, Pet, Beleza, Academia, Presente, Impostos, Outros
 
@@ -209,7 +209,7 @@ function aggregate(pages: PageResult[]): PageResult {
 
 function validate(data: PageResult) {
   const soma = data.lancamentos
-    .filter((l) => l.transactionType === "despesa")
+    .filter((l) => l.transactionType === "Despesa" || l.transactionType === "despesa")
     .reduce((acc, l) => acc + l.amount, 0);
   const total = data.fatura.total;
   const diff = Math.abs(soma - total);

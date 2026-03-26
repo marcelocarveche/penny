@@ -94,8 +94,8 @@ async function main() {
   console.log(`\nInserindo ${registros.length} lançamento(s)...`);
   await db.insert(lancamentos).values(registros);
 
-  const despesas = registros.filter((r) => r.transactionType === "despesa").length;
-  const receitas = registros.filter((r) => r.transactionType === "receita").length;
+  const despesas = registros.filter((r) => r.transactionType?.toLowerCase() === "despesa").length;
+  const receitas = registros.filter((r) => r.transactionType?.toLowerCase() === "receita").length;
   console.log(`OK — ${registros.length} inserido(s) (${despesas} despesas, ${receitas} receitas).`);
 
   await pool.end();

@@ -1,4 +1,4 @@
-import { and, desc, eq, type SQL, sum } from "drizzle-orm";
+import { and, desc, eq, or, type SQL, sum } from "drizzle-orm";
 import { cartoes, faturas, lancamentos } from "@/db/schema";
 import { buildInvoicePaymentNote } from "@/lib/contas/constants";
 import { db } from "@/lib/db";
@@ -69,11 +69,27 @@ export async function fetchInvoiceData(
 		db
 			.select({ total: sum(lancamentos.amount) })
 			.from(lancamentos)
-			.where(and(baseWhere, eq(lancamentos.transactionType, "despesa"))),
+			.where(
+				and(
+					baseWhere,
+					or(
+						eq(lancamentos.transactionType, "despesa"),
+						eq(lancamentos.transactionType, "Despesa"),
+					),
+				),
+			),
 		db
 			.select({ total: sum(lancamentos.amount) })
 			.from(lancamentos)
-			.where(and(baseWhere, eq(lancamentos.transactionType, "receita"))),
+			.where(
+				and(
+					baseWhere,
+					or(
+						eq(lancamentos.transactionType, "receita"),
+						eq(lancamentos.transactionType, "Receita"),
+					),
+				),
+			),
 	]);
 
 	const totalAmount = toNumber(despesasRow[0]?.total) - toNumber(receitasRow[0]?.total);
