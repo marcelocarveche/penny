@@ -136,3 +136,4 @@ playground/
 /docs
 # Backups locais
 backups/
+scripts/*.ofx
