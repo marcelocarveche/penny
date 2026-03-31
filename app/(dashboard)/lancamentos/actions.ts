@@ -1143,6 +1143,12 @@ const updateBulkSchema = z.object({
 		.number({ message: "Informe o valor da transação." })
 		.min(0, "Informe um valor maior ou igual a zero.")
 		.optional(),
+	installmentCount: z.coerce
+		.number()
+		.int()
+		.min(1, "Selecione uma quantidade válida.")
+		.max(60, "Selecione uma quantidade válida.")
+		.optional(),
 	dueDate: z
 		.string()
 		.trim()
@@ -1179,6 +1185,7 @@ export async function updateLancamentoBulkAction(
 				condition: true,
 				transactionType: true,
 				purchaseDate: true,
+				installmentCount: true,
 			},
 			where: and(eq(lancamentos.id, data.id), eq(lancamentos.userId, user.id)),
 		});
@@ -1206,8 +1213,18 @@ export async function updateLancamentoBulkAction(
 		if (data.amount !== undefined) {
 			const amountSign: 1 | -1 =
 				existing.transactionType === "Despesa" ? -1 : 1;
-			const amountCents = Math.round(Math.abs(data.amount) * 100);
+			const installmentDivisor =
+				existing.condition === "Parcelado"
+					? (data.installmentCount ?? existing.installmentCount ?? 1)
+					: 1;
+			const amountCents = Math.round(
+				(Math.abs(data.amount) * 100) / installmentDivisor,
+			);
 			baseUpdatePayload.amount = centsToDecimalString(amountCents * amountSign);
+		}
+
+		if (data.installmentCount !== undefined) {
+			baseUpdatePayload.installmentCount = data.installmentCount;
 		}
 
 		const hasDueDateUpdate = data.dueDate !== undefined;

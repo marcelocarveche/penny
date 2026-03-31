@@ -345,6 +345,10 @@ export function LancamentoDialog({
 						contaId: formState.contaId,
 						cartaoId: formState.cartaoId,
 						amount: sanitizedAmount,
+						installmentCount:
+							formState.condition === "Parcelado" && formState.installmentCount
+								? Number(formState.installmentCount)
+								: undefined,
 						dueDate:
 							formState.paymentMethod === "Boleto"
 								? formState.dueDate || null

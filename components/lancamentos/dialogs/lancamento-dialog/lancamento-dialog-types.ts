@@ -39,6 +39,7 @@ export interface LancamentoDialogProps {
 		contaId: string | undefined;
 		cartaoId: string | undefined;
 		amount: number;
+		installmentCount: number | undefined;
 		dueDate: string | null;
 		boletoPaymentDate: string | null;
 	}) => void;

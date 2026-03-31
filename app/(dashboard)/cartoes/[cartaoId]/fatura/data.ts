@@ -1,4 +1,4 @@
-import { and, desc, eq, or, type SQL, sum } from "drizzle-orm";
+import { and, asc, desc, eq, or, sql, type SQL, sum } from "drizzle-orm";
 import { cartoes, faturas, lancamentos } from "@/db/schema";
 import { buildInvoicePaymentNote } from "@/lib/contas/constants";
 import { db } from "@/lib/db";
@@ -67,7 +67,7 @@ export async function fetchInvoiceData(
 			),
 		}),
 		db
-			.select({ total: sum(lancamentos.amount) })
+			.select({ total: sql<string>`SUM(ABS(${lancamentos.amount}))` })
 			.from(lancamentos)
 			.where(
 				and(
@@ -79,7 +79,7 @@ export async function fetchInvoiceData(
 				),
 			),
 		db
-			.select({ total: sum(lancamentos.amount) })
+			.select({ total: sql<string>`SUM(ABS(${lancamentos.amount}))` })
 			.from(lancamentos)
 			.where(
 				and(
@@ -132,6 +132,6 @@ export async function fetchCardLancamentos(filters: SQL[]) {
 			cartao: true,
 			categoria: true,
 		},
-		orderBy: desc(lancamentos.purchaseDate),
+		orderBy: asc(lancamentos.purchaseDate),
 	});
 }

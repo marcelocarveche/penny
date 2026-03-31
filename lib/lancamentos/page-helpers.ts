@@ -178,7 +178,10 @@ export const toOption = (
 	dueDay: dueDay ?? null,
 });
 
-export const fetchLancamentoFilterSources = async (userId: string) => {
+export const fetchLancamentoFilterSources = async (
+	userId: string,
+	includeCartaoId?: string,
+) => {
 	const [pagadorRows, contaRows, cartaoRows, categoriaRows] = await Promise.all(
 		[
 			db.query.pagadores.findMany({
@@ -189,8 +192,13 @@ export const fetchLancamentoFilterSources = async (userId: string) => {
 					and(eq(contas.userId, userId), eq(contas.status, "Ativa")),
 			}),
 			db.query.cartoes.findMany({
-				where: (cartoes, { eq, and }) =>
-					and(eq(cartoes.userId, userId), eq(cartoes.status, "Ativo")),
+				where: (cartoes, { eq, and, or }) =>
+					includeCartaoId
+						? and(
+								eq(cartoes.userId, userId),
+								or(eq(cartoes.status, "Ativo"), eq(cartoes.id, includeCartaoId)),
+							)
+						: and(eq(cartoes.userId, userId), eq(cartoes.status, "Ativo")),
 			}),
 			db.query.categorias.findMany({
 				where: eq(categorias.userId, userId),

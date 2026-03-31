@@ -65,6 +65,7 @@ export function NavbarUser({ user, pagadorAvatarUrl }: NavbarUserProps) {
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<button
+						suppressHydrationWarning
 						className="relative flex size-9 items-center justify-center overflow-hidden rounded-full border-background bg-background shadow-lg"
 						aria-label="Menu do usuário"
 					>

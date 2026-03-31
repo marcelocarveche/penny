@@ -68,6 +68,7 @@ function NavigationMenuTrigger({
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
 	return (
 		<NavigationMenuPrimitive.Trigger
+			suppressHydrationWarning
 			data-slot="navigation-menu-trigger"
 			className={cn(navigationMenuTriggerStyle(), "group", className)}
 			{...props}

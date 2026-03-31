@@ -323,7 +323,7 @@ const buildColumns = ({
 
 				return (
 					<MoneyValues
-						amount={row.original.amount}
+						amount={Math.abs(row.original.amount)}
 						showPositiveSign={isReceita}
 						className={cn(
 							"whitespace-nowrap",

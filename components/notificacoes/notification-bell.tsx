@@ -110,6 +110,7 @@ export function NotificationBell({
 				<TooltipTrigger asChild>
 					<DropdownMenuTrigger asChild>
 						<button
+							suppressHydrationWarning
 							type="button"
 							aria-label="Notificações"
 							aria-expanded={open}

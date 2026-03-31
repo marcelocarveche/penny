@@ -235,6 +235,7 @@ export function LancamentosPage({
 			contaId: string | undefined;
 			cartaoId: string | undefined;
 			amount: number;
+			installmentCount: number | undefined;
 			dueDate: string | null;
 			boletoPaymentDate: string | null;
 		}) => {
@@ -268,6 +269,7 @@ export function LancamentosPage({
 				contaId: pendingEditData.contaId,
 				cartaoId: pendingEditData.cartaoId,
 				amount: pendingEditData.amount,
+				installmentCount: pendingEditData.installmentCount,
 				dueDate: pendingEditData.dueDate,
 				boletoPaymentDate: pendingEditData.boletoPaymentDate,
 			});
@@ -560,6 +562,7 @@ export function LancamentosPage({
 					pendingEditData?.lancamento.currentInstallment ?? undefined
 				}
 				totalCount={
+					pendingEditData?.installmentCount ??
 					pendingEditData?.lancamento.installmentCount ??
 					pendingEditData?.lancamento.recurrenceCount ??
 					undefined

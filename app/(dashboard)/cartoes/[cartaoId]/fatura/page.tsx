@@ -59,7 +59,7 @@ export default async function Page({ params, searchParams }: PageProps) {
 		estabelecimentos,
 		userPreferences,
 	] = await Promise.all([
-		fetchLancamentoFilterSources(userId),
+		fetchLancamentoFilterSources(userId, card.id),
 		loadLogoOptions(),
 		fetchInvoiceData(userId, cartaoId, selectedPeriod),
 		getRecentEstablishmentsAction(),
