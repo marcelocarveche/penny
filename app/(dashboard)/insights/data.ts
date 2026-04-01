@@ -33,40 +33,6 @@ export const PROVIDERS = {
  * Lista de modelos de IA disponíveis para análise de insights
  */
 export const AVAILABLE_MODELS = [
-	// OpenAI Models - GPT-5.2 Family (Latest)
-	{ id: "gpt-5.2", name: "GPT-5.2", provider: "openai" as const },
-	{
-		id: "gpt-5.2-instant",
-		name: "GPT-5.2 Instant",
-		provider: "openai" as const,
-	},
-	{
-		id: "gpt-5.2-thinking",
-		name: "GPT-5.2 Thinking",
-		provider: "openai" as const,
-	},
-
-	// OpenAI Models - GPT-5 Family
-	{ id: "gpt-5", name: "GPT-5", provider: "openai" as const },
-	{ id: "gpt-5-instant", name: "GPT-5 Instant", provider: "openai" as const },
-
-	// Anthropic Models - Claude 4.5
-	{
-		id: "claude-4.5-haiku",
-		name: "Claude 4.5 Haiku",
-		provider: "anthropic" as const,
-	},
-	{
-		id: "claude-4.5-sonnet",
-		name: "Claude 4.5 Sonnet",
-		provider: "anthropic" as const,
-	},
-	{
-		id: "claude-opus-4.1",
-		name: "Claude 4.1 Opus",
-		provider: "anthropic" as const,
-	},
-
 	// Google Models - Gemini 3 (Latest)
 	{
 		id: "gemini-3-flash-preview",
@@ -79,16 +45,21 @@ export const AVAILABLE_MODELS = [
 		provider: "google" as const,
 	},
 
-	// Google Models - Gemini 2.0
+	// Google Models - Gemini 2.5
 	{
-		id: "gemini-2.0-flash",
-		name: "Gemini 2.0 Flash",
+		id: "gemini-2.5-flash",
+		name: "Gemini 2.5 Flash",
+		provider: "google" as const,
+	},
+	{
+		id: "gemini-2.5-pro",
+		name: "Gemini 2.5 Pro",
 		provider: "google" as const,
 	},
 ] as const;
 
-export const DEFAULT_MODEL = "gpt-5.2";
-export const DEFAULT_PROVIDER = "openai";
+export const DEFAULT_MODEL = "gemini-3-flash-preview";
+export const DEFAULT_PROVIDER = "google" as const;
 
 /**
  * System prompt para análise de insights

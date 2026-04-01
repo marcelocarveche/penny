@@ -7,6 +7,7 @@ import {
 	formatPeriod,
 	formatPeriodForUrl,
 	formatPeriodParam,
+	getCurrentPeriod,
 	MONTH_NAMES,
 	parsePeriodParam,
 } from "@/lib/utils/period";
@@ -19,12 +20,11 @@ export function useMonthPeriod() {
 	const router = useRouter();
 
 	const periodFromParams = searchParams.get(PERIOD_PARAM);
-	const referenceDate = useMemo(() => new Date(), []);
-	const defaultPeriod = useMemo(
-		() =>
-			formatPeriod(referenceDate.getFullYear(), referenceDate.getMonth() + 1),
-		[referenceDate],
-	);
+	const defaultPeriod = useMemo(() => getCurrentPeriod(), []);
+	const referenceDate = useMemo(() => {
+		const [y, m] = defaultPeriod.split("-").map(Number);
+		return new Date(y, (m ?? 1) - 1, 1);
+	}, [defaultPeriod]);
 	const { period, monthName, year } = useMemo(
 		() => parsePeriodParam(periodFromParams, referenceDate),
 		[periodFromParams, referenceDate],

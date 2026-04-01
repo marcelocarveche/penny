@@ -16,14 +16,12 @@ import {
 	categorias,
 	faturas,
 	lancamentos,
-	pagadores,
 } from "@/db/schema";
 import { db } from "@/lib/db";
-import { PAGADOR_ROLE_ADMIN } from "@/lib/pagadores/constants";
 import { safeToNumber } from "@/lib/utils/number";
 import { getPreviousPeriod } from "@/lib/utils/period";
 
-const DESPESA = "despesa";
+const DESPESA = "Despesa";
 
 export type CardSummary = {
 	id: string;
@@ -116,12 +114,10 @@ export async function fetchCartoesReportData(
 			totalAmount: sum(lancamentos.amount).as("total"),
 		})
 		.from(lancamentos)
-		.innerJoin(pagadores, eq(lancamentos.pagadorId, pagadores.id))
 		.where(
 			and(
 				eq(lancamentos.userId, userId),
 				eq(lancamentos.period, currentPeriod),
-				eq(pagadores.role, PAGADOR_ROLE_ADMIN),
 				eq(lancamentos.transactionType, DESPESA),
 				inArray(lancamentos.cartaoId, cardIds),
 				or(
@@ -139,12 +135,10 @@ export async function fetchCartoesReportData(
 			totalAmount: sum(lancamentos.amount).as("total"),
 		})
 		.from(lancamentos)
-		.innerJoin(pagadores, eq(lancamentos.pagadorId, pagadores.id))
 		.where(
 			and(
 				eq(lancamentos.userId, userId),
 				eq(lancamentos.period, previousPeriod),
-				eq(pagadores.role, PAGADOR_ROLE_ADMIN),
 				eq(lancamentos.transactionType, DESPESA),
 				inArray(lancamentos.cartaoId, cardIds),
 			),
@@ -277,14 +271,12 @@ async function fetchCardDetail(
 			totalAmount: sum(lancamentos.amount).as("total"),
 		})
 		.from(lancamentos)
-		.innerJoin(pagadores, eq(lancamentos.pagadorId, pagadores.id))
 		.where(
 			and(
 				eq(lancamentos.userId, userId),
 				eq(lancamentos.cartaoId, cardId),
 				gte(lancamentos.period, startPeriod),
 				lte(lancamentos.period, currentPeriod),
-				eq(pagadores.role, PAGADOR_ROLE_ADMIN),
 				eq(lancamentos.transactionType, DESPESA),
 			),
 		)
@@ -308,13 +300,11 @@ async function fetchCardDetail(
 			totalAmount: sum(lancamentos.amount).as("total"),
 		})
 		.from(lancamentos)
-		.innerJoin(pagadores, eq(lancamentos.pagadorId, pagadores.id))
 		.where(
 			and(
 				eq(lancamentos.userId, userId),
 				eq(lancamentos.cartaoId, cardId),
 				eq(lancamentos.period, currentPeriod),
-				eq(pagadores.role, PAGADOR_ROLE_ADMIN),
 				eq(lancamentos.transactionType, DESPESA),
 			),
 		)
@@ -372,13 +362,11 @@ async function fetchCardDetail(
 			categoriaId: lancamentos.categoriaId,
 		})
 		.from(lancamentos)
-		.innerJoin(pagadores, eq(lancamentos.pagadorId, pagadores.id))
 		.where(
 			and(
 				eq(lancamentos.userId, userId),
 				eq(lancamentos.cartaoId, cardId),
 				eq(lancamentos.period, currentPeriod),
-				eq(pagadores.role, PAGADOR_ROLE_ADMIN),
 				eq(lancamentos.transactionType, DESPESA),
 			),
 		)

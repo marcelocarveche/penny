@@ -77,6 +77,7 @@ services:
       - "${APP_PORT:-3000}:3000"
     environment:
       NODE_ENV: development
+      TZ: America/Sao_Paulo
       DATABASE_URL: postgresql://${POSTGRES_USER:-penny}:${POSTGRES_PASSWORD:-penny_dev_password}@db:5432/${POSTGRES_DB:-penny_db}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-dev-secret-change-me}
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
@@ -128,6 +129,7 @@ services:
     environment:
       # Variáveis de ambiente da aplicação
       NODE_ENV: production
+      TZ: America/Sao_Paulo
 
       # DATABASE_URL do .env
       # Banco local: use host "db" (serviço Docker)

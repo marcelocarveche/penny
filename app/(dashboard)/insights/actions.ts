@@ -675,10 +675,12 @@ Responda APENAS com um JSON válido seguindo exatamente o schema especificado.`,
 			data: validatedData,
 		};
 	} catch (error) {
-		console.error("Error generating insights:", error);
+		const message =
+			error instanceof Error ? error.message : String(error);
+		console.error("[insights] Error generating insights:", message, error);
 		return {
 			success: false,
-			error: "Erro ao gerar insights. Tente novamente.",
+			error: `Erro ao gerar insights: ${message}`,
 		};
 	}
 }

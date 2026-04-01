@@ -66,13 +66,21 @@ export function formatPeriod(year: number, month: number): string {
 // ============================================================================
 
 /**
- * Returns the current period in YYYY-MM format
+ * Returns the current period in YYYY-MM format, using Brazil/Sao_Paulo timezone
+ * to avoid UTC vs local time mismatches between server and client.
  * @example
  * getCurrentPeriod() // "2025-11"
  */
 export function getCurrentPeriod(): string {
 	const now = new Date();
-	return formatPeriod(now.getFullYear(), now.getMonth() + 1);
+	const parts = new Intl.DateTimeFormat("en-CA", {
+		timeZone: "America/Sao_Paulo",
+		year: "numeric",
+		month: "2-digit",
+	}).formatToParts(now);
+	const year = Number(parts.find((p) => p.type === "year")?.value ?? now.getFullYear());
+	const month = Number(parts.find((p) => p.type === "month")?.value ?? now.getMonth() + 1);
+	return formatPeriod(year, month);
 }
 
 /**

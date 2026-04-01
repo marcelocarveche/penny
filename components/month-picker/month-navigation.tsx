@@ -1,20 +1,30 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useTransition } from "react";
 import { Card } from "@/components/ui/card";
 import { getNextPeriod, getPreviousPeriod } from "@/lib/utils/period";
 import LoadingSpinner from "./loading-spinner";
 import NavigationButton from "./nav-button";
 import ReturnButton from "./return-button";
-import { useMonthPeriod } from "./use-month-period";
+import { MONTH_PERIOD_PARAM, useMonthPeriod } from "./use-month-period";
 
 export default function MonthNavigation() {
 	const { period, currentMonth, currentYear, defaultPeriod, buildHref } =
 		useMonthPeriod();
 
 	const router = useRouter();
+	const searchParams = useSearchParams();
 	const [isPending, startTransition] = useTransition();
+
+	// When no explicit period is in the URL, redirect to the client-computed default
+	// period so the server component fetches data for the correct local month
+	// (avoids UTC vs UTC-3 mismatch at midnight).
+	useEffect(() => {
+		if (!searchParams.get(MONTH_PERIOD_PARAM)) {
+			router.replace(buildHref(defaultPeriod), { scroll: false });
+		}
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const currentMonthLabel = useMemo(
 		() =>
@@ -65,11 +75,12 @@ export default function MonthNavigation() {
 
 				<div className="flex items-center">
 					<div
+						suppressHydrationWarning
 						className="mx-1 space-x-1 capitalize font-semibold"
 						aria-current={!isDifferentFromCurrent ? "date" : undefined}
 						aria-label={`Período selecionado: ${currentMonthLabel}`}
 					>
-						<span>{currentMonthLabel}</span>
+						<span suppressHydrationWarning>{currentMonthLabel}</span>
 					</div>
 
 					{isPending && <LoadingSpinner />}

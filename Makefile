@@ -11,7 +11,7 @@ prod:
 
 # Reinicia os containers em modo desenvolvimento
 restart:
-	docker compose stop && docker compose --profile dev up
+	docker compose stop && docker compose --profile dev up -d
 
 # Para os containers sem remover
 stop:
