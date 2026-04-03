@@ -58,7 +58,7 @@ fi
 
 # Verifica se o arquivo existe no Drive
 echo "1/3  Verificando backup no Drive..."
-if ! rclone lsf "${REMOTE}:${REMOTE_PATH}/latest.sql.gz" &>/dev/null; then
+if ! rclone lsf "${REMOTE}:${REMOTE_PATH}/" 2>/dev/null | grep -q "^latest.sql.gz$"; then
   echo "     Nenhum backup encontrado em ${REMOTE}:${REMOTE_PATH}/latest.sql.gz"
   exit 1
 fi

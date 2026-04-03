@@ -134,6 +134,7 @@ local/
 scratch/
 playground/
 /docs
+/todo
 # Backups locais
 backups/
 scripts/*.ofx

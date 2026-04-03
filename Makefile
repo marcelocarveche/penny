@@ -1,4 +1,4 @@
-.PHONY: dev prod stop down logs logs-app logs-dev ps build backup restore backup-cloud restore-cloud backup-if-changed setup-rclone seed extract-fatura import-fatura import-ofx
+.PHONY: dev prod stop down logs logs-app logs-dev ps build backup restore backup-cloud restore-cloud backup-if-changed setup-rclone seed extract-fatura parse-fatura import-fatura import-ofx importar-fatura import sync-series merge-series
 
 
 # Inicia em modo desenvolvimento (hot reload)
@@ -115,10 +115,35 @@ extract-fatura:
 	@test -n "$(FILE)" || (echo "Informe o arquivo: make extract-fatura FILE=scripts/import/fatura.pdf" && exit 1)
 	pnpm tsx scripts/extract-fatura.ts $(FILE)
 
+# Converte o .txt da fatura SISBB em JSON (uso: make parse-fatura FILE=scripts/import/abril.txt)
+parse-fatura:
+	@test -n "$(FILE)" || (echo "Informe o arquivo: make parse-fatura FILE=scripts/import/abril.txt" && exit 1)
+	pnpm tsx scripts/parse-fatura-txt.ts $(FILE)
+
 # Importa o JSON extraido para o banco (uso: make import-fatura FILE=scripts/import/fatura-2025-03.json)
 import-fatura:
 	@test -n "$(FILE)" || (echo "Informe o arquivo: make import-fatura FILE=scripts/import/fatura-2025-03.json" && exit 1)
 	pnpm tsx scripts/import-fatura.ts $(FILE)
+
+# Parse + importação do .txt em um único passo (uso: make importar-fatura FILE=abril.txt)
+importar-fatura:
+	@test -n "$(FILE)" || (echo "Informe o arquivo: make importar-fatura FILE=abril.txt" && exit 1)
+	pnpm tsx scripts/importar-fatura-txt.ts scripts/import/$(FILE)
+
+# Atalho: make import FILE=abril.txt
+import:
+	@test -n "$(FILE)" || (echo "Informe o arquivo: make import FILE=abril.txt" && exit 1)
+	pnpm tsx scripts/importar-fatura-txt.ts scripts/import/$(FILE)
+
+# Propaga pagador/categoria/nota entre parcelas da mesma série
+# Uso: make sync-series (dry-run) ou make sync-series APPLY=1
+sync-series:
+	pnpm tsx scripts/sync-series-meta.ts $(if $(APPLY),--apply,)
+
+# Unifica series_id fragmentados (nome truncado vs. completo) e propaga metadados
+# Uso: make merge-series (dry-run) ou make merge-series APPLY=1
+merge-series:
+	pnpm tsx scripts/merge-series.ts $(if $(APPLY),--apply,)
 
 # Importa o arquivo OFX em scripts/import/fatura.ofx para o banco
 import-ofx:
